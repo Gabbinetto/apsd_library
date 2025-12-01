@@ -1,12 +1,16 @@
 package apsd.interfaces.containers.base;
 
-// import apsd.classes.utilities.Natural;
+import apsd.classes.utilities.Natural;
 
 /** Interface: Container, la base di tutti i contenitori. */
 public interface Container {
 
   // Size
+  Natural Size();
 
   // IsEmpty
+  default boolean IsEmpty() {
+    return Size().IsZero();
+  }
 
 }
