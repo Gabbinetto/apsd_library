@@ -11,12 +11,16 @@ public interface SortedSequence<Data extends Comparable<? super Data>>
   /* Override specific member functions from MembershipContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  default boolean Exists(Data dat) {
+    return Search(dat) != null;
+  }
 
   /* ************************************************************************ */
   /* Override specific member functions from Sequence */
   /* ************************************************************************ */
 
+  @Override
   default Natural Search(Data dat) {
     // In ordine, quindi si può usare una ricerca binaria
     long low = 0, high = Size().ToLong() - 1;
