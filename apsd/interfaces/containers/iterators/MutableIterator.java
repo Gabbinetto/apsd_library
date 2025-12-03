@@ -4,6 +4,6 @@ package apsd.interfaces.containers.iterators;
 public interface MutableIterator<Data> extends Iterator<Data> { // Must extend Iterator
 
   // SetCurrent
-  Data SetCurrent();
+  void SetCurrent(Data dat);
 
 }
