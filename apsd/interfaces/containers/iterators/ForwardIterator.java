@@ -8,7 +8,9 @@ public interface ForwardIterator<Data> extends Iterator<Data> { // Must extend I
 
   // Next
   default void Next(Natural amount) {
-    // TODO: Implementare
+    long natam = amount.ToLong();
+    for (long i = 0L; i < natam; i++)
+      DataNNext();
   }
 
   default void Next(long amount) {
