@@ -46,7 +46,8 @@ public interface OrderedSet<Data extends Comparable<? super Data>> extends Set<D
   // Predecessor
   default Data Predecessor(Data dat) {
     ForwardIterator<Data> iter = FIterator();
-    Data prev = iter.DataNNext();
+    Data prev = iter.GetCurrent();
+    iter.Next();
     if (prev.compareTo(dat) == 0)
       return null; // Se dat è il primo elemento, non c'è predecessore
 

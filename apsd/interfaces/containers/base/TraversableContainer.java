@@ -36,18 +36,18 @@ public interface TraversableContainer<Data> extends MembershipContainer<Data> { 
     return acc.Get();
   }
 
-  /* ************************************************************************
-  /* Override specific member functions from Container */
+  /*
+   * ************************************************************************
+   * /* Override specific member functions from Container
+   */
   /* ************************************************************************ */
 
   @Override
   default Natural Size() {
-    MutableNatural size = MutableNatural.Of(0);
-    TraverseForward(dat -> {
-      size.Increment();
-      return false;
-    });
-    return Natural.Of(size);
+    return Natural.Of(FoldForward((dat, acc) -> {
+      acc++;
+      return acc;
+    }, 0L));
   }
 
   /* ************************************************************************ */
