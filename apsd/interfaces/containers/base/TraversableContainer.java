@@ -1,7 +1,6 @@
 package apsd.interfaces.containers.base;
 
 import apsd.classes.utilities.Box;
-import apsd.classes.utilities.MutableNatural;
 import apsd.classes.utilities.Natural;
 import apsd.interfaces.traits.Accumulator;
 import apsd.interfaces.traits.Predicate;
