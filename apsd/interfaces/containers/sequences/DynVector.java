@@ -18,16 +18,8 @@ public interface DynVector<Data>
 
   @Override
   default void InsertAt(Data dat, Natural num) {
-    long idx = ExcIfOutOfBound(num);
-    Natural size = Size();
-
-    if (size.compareTo(Capacity()) >= 0) {
-      Expand();
-    }
-
-    SetAt(dat, size);
-
-    ShiftLeft(size, Natural.Of(size.ToLong() - idx));
+    ShiftRight(num);
+    SetAt(dat, num);
   }
 
   /* ************************************************************************ */
@@ -36,23 +28,43 @@ public interface DynVector<Data>
 
   @Override
   default Data AtNRemove(Natural num) {
-    long idx = ExcIfOutOfBound(num);
     Data dat = GetAt(num);
-    Natural size = Size();
-
-    ShiftRight(num, Natural.Of(size.ToLong() - 1L - idx));
-
-    SetAt(null, size.Decrement());
-
-    if (size.Decrement().ToLong() < Capacity().ToLong() / THRESHOLD_FACTOR)
-      Shrink();
-
+    ShiftLeft(num);
     return dat;
   }
 
   /* ************************************************************************ */
   /* Specific member functions of Vector */
   /* ************************************************************************ */
+
+  // ShiftLeft
+  @Override
+  default void ShiftLeft(Natural pos, Natural num) {
+    Vector.super.ShiftLeft(pos, num);
+    Reduce(num);
+  }
+
+  // ShiftRight
+  @Override
+  default void ShiftRight(Natural pos, Natural num) {
+    long idx = ExcIfOutOfBound(pos);
+    long len = num.ToLong();
+    if (len <= 0)
+      return;
+
+    Expand(num);
+    long size = Size().ToLong();
+
+    long wrt = size - 1;
+    for (long rdr = wrt - len; wrt < size; rdr++, wrt++) {
+      Natural natrdr = Natural.Of(rdr);
+      SetAt(GetAt(natrdr), Natural.Of(wrt));
+      SetAt(null, natrdr);
+    }
+    for (wrt = idx; wrt < idx + len; wrt++) {
+      SetAt(null, Natural.Of(wrt));
+    }
+  }
 
   @Override
   default DynVector<Data> SubVector(Natural start, Natural end) {

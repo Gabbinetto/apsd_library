@@ -11,14 +11,14 @@ public interface ResizableContainer extends ReallocableContainer { // Must exten
 
   // Expand
   default void Expand() {
-    Expand(Natural.ZERO);
+    Expand(Natural.ONE);
   }
 
   void Expand(Natural amount);
 
   // Reduce
   default void Reduce() {
-    Reduce(Natural.ZERO);
+    Reduce(Natural.ONE);
   }
 
   void Reduce(Natural amount);
@@ -28,7 +28,7 @@ public interface ResizableContainer extends ReallocableContainer { // Must exten
   /* ************************************************************************ */
 
   @Override
-  abstract Natural Size();
+  Natural Size();
 
   /* ************************************************************************ */
   /* Override specific member functions from ReallocableContainer */
