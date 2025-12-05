@@ -72,7 +72,47 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
     if (idx.compareTo(Size().Decrement()) == 0)
       return null;
 
-    return GetAt(idx.Decrement());
+    return GetAt(idx.Increment());
+  }
+
+  @Override
+  default Data PredecessorNRemove(Data dat) {
+    Natural idx = Search(dat);
+    if (idx.compareTo(Natural.ZERO) <= 0)
+      return null;
+    idx = idx.Decrement();
+    Data prev = GetAt(idx);
+    RemoveAt(idx);
+    return prev;
+  }
+
+  @Override
+  default Data SuccessorNRemove(Data dat) {
+    Natural idx = Search(dat);
+    if (idx.compareTo(Size().Decrement()) >= 0)
+      return null;
+    idx = idx.Increment();
+    Data succ = GetAt(idx);
+    RemoveAt(idx);
+    return succ;
+  }
+
+  @Override
+  default void RemovePredecessor(Data dat) {
+    Natural idx = Search(dat);
+    if (idx.compareTo(Natural.ZERO) <= 0)
+      return;
+    idx = idx.Decrement();
+    RemoveAt(idx);
+  }
+
+  @Override
+  default void RemoveSuccessor(Data dat) {
+    Natural idx = Search(dat);
+    if (idx.compareTo(Size().Decrement()) >= 0)
+      return;
+    idx = idx.Increment();
+    RemoveAt(idx);
   }
 
   /* ************************************************************************ */
