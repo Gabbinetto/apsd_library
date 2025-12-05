@@ -12,21 +12,22 @@ public interface Vector<Data> extends ReallocableContainer, MutableSequence<Data
   }
 
   default void ShiftLeft(Natural pos, Natural num) {
-    long idx = ExcIfOutOfBound(pos); // 4
-    long size = Size().ToLong(); // 10
-    long len = num.ToLong(); // 7
-    len = (len <= size - idx) ? len : size - idx;
-    if (len > 0) {
-      long iniwrt = idx;
-      long wrt = iniwrt;
-      for (long rdr = wrt + len; rdr < size; rdr++, wrt++) {
-        Natural natrdr = Natural.Of(rdr);
-        SetAt(GetAt(natrdr), Natural.Of(wrt));
-        SetAt(null, natrdr);
-      }
-      for (; wrt - iniwrt < len; wrt++) {
-        SetAt(null, Natural.Of(wrt));
-      }
+    long idx = ExcIfOutOfBound(pos);
+    long size = Size().ToLong();
+    long len = num.ToLong();
+    len = (len <= size - idx - 1) ? len : size - idx - 1;
+    if (len <= 0)
+      return;
+
+    long iniwrt = idx;
+    long wrt = iniwrt;
+    for (long rdr = wrt + len; rdr < size; rdr++, wrt++) {
+      Natural natrdr = Natural.Of(rdr);
+      SetAt(GetAt(natrdr), Natural.Of(wrt));
+      SetAt(null, natrdr);
+    }
+    for (; wrt - iniwrt < len; wrt++) {
+      SetAt(null, Natural.Of(wrt));
     }
   }
 
@@ -49,18 +50,20 @@ public interface Vector<Data> extends ReallocableContainer, MutableSequence<Data
     long idx = ExcIfOutOfBound(pos);
     long size = Size().ToLong();
     long len = num.ToLong();
-    len = (len <= size - idx) ? len : size - idx;
-    if (len > 0) {
-      long iniwrt = idx;
-      long wrt = iniwrt;
-      for (long rdr = wrt - len; rdr >= idx; rdr--, wrt--) {
-        Natural natrdr = Natural.Of(rdr);
-        SetAt(GetAt(natrdr), Natural.Of(wrt));
-        SetAt(null, natrdr);
-      }
-      for (; wrt > idx; wrt--) {
-        SetAt(null, Natural.Of(wrt));
-      }
+    len = (len <= size - idx - 1) ? len : size - idx - 1;
+    if (len <= 0)
+      return;
+
+    long iniwrt = idx + len;
+    long wrt = iniwrt;
+    long rdr = idx;
+    for (; wrt < size; rdr++, wrt++) {
+      Natural natrdr = Natural.Of(rdr);
+      SetAt(GetAt(natrdr), Natural.Of(wrt));
+      SetAt(null, natrdr);
+    }
+    for (wrt = rdr; wrt < iniwrt; wrt++) {
+      SetAt(null, Natural.Of(wrt));
     }
   }
 
