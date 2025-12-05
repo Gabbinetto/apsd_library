@@ -56,7 +56,7 @@ public interface DynVector<Data>
     long size = Size().ToLong();
 
     long wrt = size - 1;
-    for (long rdr = wrt - len; wrt < size; rdr++, wrt++) {
+    for (long rdr = wrt - len; rdr >= idx; rdr--, wrt--) {
       Natural natrdr = Natural.Of(rdr);
       SetAt(GetAt(natrdr), Natural.Of(wrt));
       SetAt(null, natrdr);
