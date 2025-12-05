@@ -53,13 +53,12 @@ public interface DynVector<Data>
       return;
 
     Expand(num);
-    long size = Size().ToLong();
+   long size = Size().ToLong();
 
     long wrt = size - 1;
     for (long rdr = wrt - len; rdr >= idx; rdr--, wrt--) {
       Natural natrdr = Natural.Of(rdr);
       SetAt(GetAt(natrdr), Natural.Of(wrt));
-      SetAt(null, natrdr);
     }
     for (wrt = idx; wrt < idx + len; wrt++) {
       SetAt(null, Natural.Of(wrt));
