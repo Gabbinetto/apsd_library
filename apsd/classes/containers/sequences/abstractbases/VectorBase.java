@@ -30,6 +30,10 @@ abstract public class VectorBase<Data> implements Vector<Data> {
     });
   }
 
+  protected VectorBase(Data[] arr) {
+    this.arr = arr;
+  }
+
   // NewVector
   abstract void NewVector(Data[] dat);
 
