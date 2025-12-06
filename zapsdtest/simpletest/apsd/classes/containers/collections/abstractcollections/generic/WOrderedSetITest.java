@@ -17,7 +17,7 @@ abstract public class WOrderedSetITest extends WOrderedSetTest<Long> {
     TestInsert(2L, true);
     TestInsert(0L, false);
     TestSize(5, false);
-    TestPrintContent("");
+    TestPrintContent("Initial Ordered Set");
   }
 
   @Nested

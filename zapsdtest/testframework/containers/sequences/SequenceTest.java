@@ -16,8 +16,7 @@ public interface SequenceTest<Data, Con extends Sequence<Data>>
       assertThrows(IndexOutOfBoundsException.class, () -> ThisContainer().GetAt(position),
       "GetAt should throw IndexOutOfBoundsException for invalid position");
     } else {
-      Data element = ThisContainer().GetAt(position);
-      assertEquals(expectedElement, element,
+      assertEquals(expectedElement, ThisContainer().GetAt(position),
       "GetAt should return " + expectedElement + " at position " + position);
     }
     EndTest();
@@ -29,8 +28,8 @@ public interface SequenceTest<Data, Con extends Sequence<Data>>
       assertThrows(IndexOutOfBoundsException.class, () -> ThisContainer().GetFirst(),
       "GetFirst should throw exception when sequence is empty");
     } else {
-      Data first = ThisContainer().GetFirst();
-      assertEquals(expectedElement, first, "GetFirst should return " + expectedElement);
+      assertEquals(expectedElement, ThisContainer().GetFirst(),
+      "GetFirst should return " + expectedElement);
     }
     EndTest();
   }
@@ -41,8 +40,8 @@ public interface SequenceTest<Data, Con extends Sequence<Data>>
       assertThrows(IndexOutOfBoundsException.class, () -> ThisContainer().GetLast(),
       "GetLast should throw exception when sequence is empty");
     } else {
-      Data last = ThisContainer().GetLast();
-      assertEquals(expectedElement, last, "GetLast should return " + expectedElement);
+      assertEquals(expectedElement, ThisContainer().GetLast(),
+      "GetLast should return " + expectedElement);
     }
     EndTest();
   }
@@ -73,8 +72,7 @@ public interface SequenceTest<Data, Con extends Sequence<Data>>
       () -> ThisContainer().ExcIfOutOfBound(position),
       "ExcIfOutOfBound should throw exception for invalid position");
     } else {
-      long index = ThisContainer().ExcIfOutOfBound(position);
-      assertEquals(position.ToLong(), index,
+      assertEquals(position.ToLong(), ThisContainer().ExcIfOutOfBound(position),
       "ExcIfOutOfBound should return the index for valid position");
     }
     EndTest();
@@ -90,7 +88,7 @@ public interface SequenceTest<Data, Con extends Sequence<Data>>
       assertTrue(subSequence.Size().ToLong() <= ThisContainer().Size().ToLong(),
       "SubSequence should not be larger than original");
       for(Natural idx = Natural.ZERO; from.compareTo(to) <= 0; idx = idx.Increment(), from = from.Increment()) {
-        assertEquals(subSequence.GetAt(idx), ThisContainer().GetAt(from),
+        assertEquals(ThisContainer().GetAt(from), subSequence.GetAt(idx),
         "Values at position " + idx + " and " + from + " should be equal");
       }
     }

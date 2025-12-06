@@ -19,7 +19,7 @@ abstract public class WSetITest extends WSetTest<Long> {
     TestInsert(2L, true);
     TestInsert(0L, false);
     TestSize(5, false);
-    TestPrintContent("");
+    TestPrintContent("Initial Set");
   }
 
   @Nested

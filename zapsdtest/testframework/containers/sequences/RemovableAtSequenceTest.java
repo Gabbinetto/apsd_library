@@ -30,8 +30,7 @@ public interface RemovableAtSequenceTest<Data, Con extends RemovableAtSequence<D
       "AtNRemove should throw exception for invalid position");
     } else {
       long initialSize = ThisContainer().Size().ToLong();
-      Data removed = ThisContainer().AtNRemove(position);
-      assertEquals(expectedElement, removed,
+      assertEquals(expectedElement, ThisContainer().AtNRemove(position),
       "AtNRemove should return the removed element");
       assertEquals(initialSize - 1, ThisContainer().Size().ToLong(),
       "Size should decrease by 1 after AtNRemove");
@@ -42,13 +41,14 @@ public interface RemovableAtSequenceTest<Data, Con extends RemovableAtSequence<D
   default void TestRemoveFirst() {
     BeginTest("RemoveFirst");
     long initialSize = ThisContainer().Size().ToLong();
-    ThisContainer().RemoveFirst();
     if (initialSize == 0) {
-      assertEquals(initialSize, ThisContainer().Size().ToLong(),
-        "Size should be 0 after RemoveFirst");
+      assertThrows(IndexOutOfBoundsException.class,
+      () -> ThisContainer().RemoveFirst(),
+      "RemoveFirst should throw exception on empty sequence");
     } else {
+      ThisContainer().RemoveFirst();
       assertEquals(initialSize - 1, ThisContainer().Size().ToLong(),
-        "Size should decrease by 1 after RemoveFirst");
+      "Size should decrease by 1 after RemoveFirst");
     }
     EndTest();
   }
@@ -56,15 +56,15 @@ public interface RemovableAtSequenceTest<Data, Con extends RemovableAtSequence<D
   default void TestFirstNRemove(Data expectedElement) {
     BeginTest("FirstNRemove");
     long initialSize = ThisContainer().Size().ToLong();
-    Data removed = ThisContainer().FirstNRemove();
-    assertEquals(expectedElement, removed,
-    "FirstNRemove should return the first element");
     if (initialSize == 0) {
-      assertEquals(initialSize, ThisContainer().Size().ToLong(),
-        "Size should be 0 after FirstNRemove");
+      assertThrows(IndexOutOfBoundsException.class,
+      () -> ThisContainer().FirstNRemove(),
+      "FirstNRemove should throw exception on empty sequence");
     } else {
+      assertEquals(expectedElement, ThisContainer().FirstNRemove(),
+      "FirstNRemove should return the first element");
       assertEquals(initialSize - 1, ThisContainer().Size().ToLong(),
-        "Size should decrease by 1 after FirstNRemove");
+      "Size should decrease by 1 after FirstNRemove");
     }
     EndTest();
   }
@@ -72,13 +72,14 @@ public interface RemovableAtSequenceTest<Data, Con extends RemovableAtSequence<D
   default void TestRemoveLast() {
     BeginTest("RemoveLast");
     long initialSize = ThisContainer().Size().ToLong();
-    ThisContainer().RemoveLast();
     if (initialSize == 0) {
-      assertEquals(initialSize, ThisContainer().Size().ToLong(),
-        "Size should be 0 after RemoveLast");
+      assertThrows(IndexOutOfBoundsException.class,
+      () -> ThisContainer().RemoveLast(),
+      "RemoveLast should throw exception on empty sequence");
     } else {
+      ThisContainer().RemoveLast();
       assertEquals(initialSize - 1, ThisContainer().Size().ToLong(),
-        "Size should decrease by 1 after RemoveLast");
+      "Size should decrease by 1 after RemoveLast");
     }
     EndTest();
   }
@@ -86,15 +87,15 @@ public interface RemovableAtSequenceTest<Data, Con extends RemovableAtSequence<D
   default void TestLastNRemove(Data expectedElement) {
     BeginTest("LastNRemove");
     long initialSize = ThisContainer().Size().ToLong();
-    Data removed = ThisContainer().LastNRemove();
-    assertEquals(expectedElement, removed,
-    "LastNRemove should return the last element");
     if (initialSize == 0) {
-      assertEquals(initialSize, ThisContainer().Size().ToLong(),
-        "Size should be 0 after LastNRemove");
+      assertThrows(IndexOutOfBoundsException.class,
+      () -> ThisContainer().LastNRemove(),
+      "LastNRemove should throw exception on empty sequence");
     } else {
+      assertEquals(expectedElement, ThisContainer().LastNRemove(),
+      "LastNRemove should return the last element");
       assertEquals(initialSize - 1, ThisContainer().Size().ToLong(),
-        "Size should decrease by 1 after LastNRemove");
+      "Size should decrease by 1 after LastNRemove");
     }
     EndTest();
   }

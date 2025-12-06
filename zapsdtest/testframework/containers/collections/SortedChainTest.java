@@ -7,7 +7,7 @@ import zapsdtest.testframework.containers.sequences.SortedSequenceTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public interface SortedChainTest<Data extends Comparable<? super Data>, Con extends SortedChain<Data>> extends ChainTest<Data, Con>, SortedSequenceTest<Data, Con> {
+public interface SortedChainTest<Data extends Comparable<? super Data>, Con extends SortedChain<Data>> extends OrderedChainTest<Data, Con>, SortedSequenceTest<Data, Con> {
 
   default void TestSearchPredecessor(Data element, Natural expectedPosition) {
     BeginTest("SearchPredecessor");

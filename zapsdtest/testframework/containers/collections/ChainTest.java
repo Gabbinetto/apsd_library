@@ -38,8 +38,8 @@ public interface ChainTest<Data, Con extends Chain<Data>> extends SetTest<Data, 
       assertNotNull(subChain, "SubChain should not return null");
       assertTrue(subChain.Size().ToLong() <= ThisContainer().Size().ToLong(),
       "SubChain should not be larger than original");
-      assertEquals(subChain.Size().ToLong(), to.ToLong() - from.ToLong() + 1,
-      "SubChain should not be as large as the required interval");
+      assertEquals(to.ToLong() - from.ToLong() + 1, subChain.Size().ToLong(),
+      "SubChain should be as large as the required interval");
     }
     EndTest();
   }

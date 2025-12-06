@@ -60,13 +60,13 @@ public interface OrderedSetTest<Data extends Comparable<? super Data>, Con exten
     EndTest();
   }
 
-  default void TestRemovePredecessor(Data element, Data expectedElement) {
+  default void TestRemovePredecessor(Data element) {
     BeginTest("RemovePredecessor");
     ThisContainer().RemovePredecessor(element);
     EndTest();
   }
 
-  default void TestRemoveSuccessor(Data element, Data expectedElement) {
+  default void TestRemoveSuccessor(Data element) {
     BeginTest("RemoveSuccessor");
     ThisContainer().RemoveSuccessor(element);
     EndTest();

@@ -21,8 +21,7 @@ public interface DynVectorTest<Data, Con extends DynVector<Data>> extends Vector
   default void TestAtNRemoveWithAutoReduction(Natural position, Data expectedElement) {
     BeginTest("AtNRemoveWithAutoReduction");
     long initialSize = ThisContainer().Size().ToLong();
-    Data removed = ThisContainer().AtNRemove(position);
-    assertEquals(expectedElement, removed,
+    assertEquals(expectedElement, ThisContainer().AtNRemove(position),
     "AtNRemove should return the removed element");
     assertEquals(initialSize - 1, ThisContainer().Size().ToLong(),
     "AtNRemove should automatically reduce size");
@@ -107,11 +106,12 @@ public interface DynVectorTest<Data, Con extends DynVector<Data>> extends Vector
   @Override
   default void TestShiftLastRight() {
     BeginTest("ShiftLastRight");
+    Data dat = ThisContainer().GetLast();
     long initialSize = ThisContainer().Size().ToLong();
     ThisContainer().ShiftLastRight();
     assertEquals(initialSize + 1, ThisContainer().Size().ToLong(),
     "ShiftLastRight should automatically call Expand and Size should increase by 1");
-    assertNull(ThisContainer().GetLast(), "Last position should be null");
+    assertEquals(dat, ThisContainer().GetLast(), "Last position should be preserved");
     EndTest();
   }
 

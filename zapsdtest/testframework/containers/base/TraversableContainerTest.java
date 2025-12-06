@@ -65,13 +65,16 @@ public interface TraversableContainerTest<Data, Con extends TraversableContainer
   }
 
   default void TestPrintContent(String str) {
-    TestTraverseForward(dat -> {
-      System.out.print(dat);
-      System.out.print(" ");
-      return false;
-    },
-    false
-    );
+    BeginTest("PrintContent" + (str.isEmpty() ? "" : " ") + str);
+    boolean result = ThisContainer()
+      .TraverseForward(dat -> {
+          System.out.print(dat);
+          System.out.print(" ");
+          return false;
+        }
+      );
+    assertFalse(result, "TraverseForward inside PrintContent should return false");
+    EndTest();
   }
 
 }

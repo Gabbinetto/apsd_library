@@ -20,7 +20,7 @@ abstract public class XListITest extends XListTest<Long> {
     TestInsert(5L, true);
     TestInsertLast(1L);
     TestSize(9, false);
-    TestPrintContent("");
+    TestPrintContent("Initial List");
   }
 
   @Nested

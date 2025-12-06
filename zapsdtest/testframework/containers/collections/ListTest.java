@@ -19,8 +19,8 @@ public interface ListTest<Data, Con extends List<Data>> extends ChainTest<Data, 
       assertNotNull(subList, "SubList should not return null");
       assertTrue(subList.Size().ToLong() <= ThisContainer().Size().ToLong(),
       "SubList should not be larger than original");
-      assertEquals(subList.Size().ToLong(), to.ToLong() - from.ToLong() + 1,
-      "SubList should not be as large as the required interval");
+      assertEquals(to.ToLong() - from.ToLong() + 1, subList.Size().ToLong(),
+      "SubList should be as large as the required interval");
     }
     EndTest();
   }

@@ -30,8 +30,7 @@ public interface MutableSequenceTest<Data, Con extends MutableSequence<Data>> ex
       () -> ThisContainer().SetAt(newElement, position),
       "GetNSetAt should throw exception for invalid position");
     } else {
-      Data oldElement = ThisContainer().GetNSetAt(newElement, position);
-      assertEquals(expectedOld, oldElement,
+      assertEquals(expectedOld, ThisContainer().GetNSetAt(newElement, position),
       "GetNSetAt should return original element");
       assertEquals(newElement, ThisContainer().GetAt(position),
       "GetNSetAt should set new element");
@@ -60,8 +59,7 @@ public interface MutableSequenceTest<Data, Con extends MutableSequence<Data>> ex
       () -> ThisContainer().SetFirst(newElement),
       "SetFirst should throw exception when sequence is empty");
     } else {
-      Data oldElement = ThisContainer().GetNSetFirst(newElement);
-      assertEquals(expectedOld, oldElement,
+      assertEquals(expectedOld, ThisContainer().GetNSetFirst(newElement),
       "GetNSetFirst should return original first element");
       assertEquals(newElement, ThisContainer().GetFirst(),
       "GetNSetFirst should set new first element");
@@ -90,8 +88,7 @@ public interface MutableSequenceTest<Data, Con extends MutableSequence<Data>> ex
       () -> ThisContainer().SetLast(newElement),
       "GetNSetLast should throw exception when sequence is empty");
     } else {
-      Data oldElement = ThisContainer().GetNSetLast(newElement);
-      assertEquals(expectedOld, oldElement,
+      assertEquals(expectedOld, ThisContainer().GetNSetLast(newElement),
       "GetNSetLast should return original last element");
       assertEquals(newElement, ThisContainer().GetLast(),
       "GetNSetLast should set new last element");

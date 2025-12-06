@@ -52,7 +52,7 @@ public interface IterableContainerTest<Data, Con extends IterableContainer<Data>
         iterator.Next();
         count++;
       }
-      assertEquals(ThisContainer().Size().ToLong(), count,
+      assertEquals(count, ThisContainer().Size().ToLong(),
       "Should iterate over all elements forwards");
     }
     EndTest();
@@ -70,7 +70,7 @@ public interface IterableContainerTest<Data, Con extends IterableContainer<Data>
         iterator.Prev();
         count++;
       }
-      assertEquals(ThisContainer().Size().ToLong(), count,
+      assertEquals(count, ThisContainer().Size().ToLong(),
       "Should iterate over all elements forwards");
     }
     EndTest();

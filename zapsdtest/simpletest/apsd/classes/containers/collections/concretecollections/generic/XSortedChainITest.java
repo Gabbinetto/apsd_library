@@ -20,7 +20,7 @@ abstract public class XSortedChainITest extends XSortedChainTest<Long> {
     TestInsert(5L, true);
     TestInsert(1L, true);
     TestSize(9, false);
-    TestPrintContent("");
+    TestPrintContent("Initial Sorted Chain");
   }
 
   @Nested
@@ -46,7 +46,7 @@ abstract public class XSortedChainITest extends XSortedChainTest<Long> {
     @Test
     @DisplayName("Check starting from a NonEmpty SortedChain")
     public void NonEmpty() {
-      AddTest(19);
+      AddTest(20);
       NewNonEmptyContainer();
       TestGetFirst(0L, false);
       TestGetLast(9L, false);
@@ -64,6 +64,7 @@ abstract public class XSortedChainITest extends XSortedChainTest<Long> {
       TestSize(6, false);
       TestInsert(3L, true);
       TestPrintContent("");
+      TestSuccessor(6L, null);
       TestFoldBackward((dat, acc) -> acc + dat, 0L, 16L);
       TestClear();
       TestSize(0, false);
