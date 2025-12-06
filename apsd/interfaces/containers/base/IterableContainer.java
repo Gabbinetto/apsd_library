@@ -17,11 +17,14 @@ public interface IterableContainer<Data> extends TraversableContainer<Data> { //
   // IsEqual
   default boolean IsEqual(IterableContainer<Data> iter) {
     Box<Boolean> equal = new Box<>(true);
+    ForwardIterator<Data> other = iter.FIterator();
     TraverseForward(
-      dat -> {
-        equal.Set(dat.equals(iter.FIterator().GetCurrent()));
-        return !equal.Get();
-      }
+        dat -> {
+          equal.Set(dat.equals(other.GetCurrent()));
+          other.Next();
+          return !equal.Get();
+        }
+
     );
     return equal.Get();
   }
