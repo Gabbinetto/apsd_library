@@ -54,8 +54,8 @@ public interface Vector<Data> extends ReallocableContainer, MutableSequence<Data
     if (len <= 0)
       return;
 
-    long wrt = size - len;
-    for (long rdr = wrt - idx; rdr >= idx; rdr--, wrt--) {
+    long wrt = size - 1;
+    for (long rdr = wrt - len; rdr >= idx; rdr--, wrt--) {
       Natural natrdr = Natural.Of(rdr);
       SetAt(GetAt(natrdr), Natural.Of(wrt));
       SetAt(null, natrdr);
