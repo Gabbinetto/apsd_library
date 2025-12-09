@@ -47,22 +47,8 @@ public interface DynVector<Data>
   // ShiftRight
   @Override
   default void ShiftRight(Natural pos, Natural num) {
-    long idx = ExcIfOutOfBound(pos);
-    long len = num.ToLong();
-    if (len <= 0)
-      return;
-
     Expand(num);
-   long size = Size().ToLong();
-
-    long wrt = size - 1;
-    for (long rdr = wrt - len; rdr >= idx; rdr--, wrt--) {
-      Natural natrdr = Natural.Of(rdr);
-      SetAt(GetAt(natrdr), Natural.Of(wrt));
-    }
-    for (wrt = idx; wrt < idx + len; wrt++) {
-      SetAt(null, Natural.Of(wrt));
-    }
+    Vector.super.ShiftRight(pos, num);
   }
 
   @Override
