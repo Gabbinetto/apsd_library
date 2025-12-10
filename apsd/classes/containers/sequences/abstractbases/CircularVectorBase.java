@@ -27,6 +27,10 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
     start = 0L;
   }
 
+  private int IndexCircular(Natural num) {
+    return (int) ((this.start + ExcIfOutOfBound(num)) % arr.length);
+  }
+
   /* ************************************************************************ */
   /* Override specific member functions from ReallocableContainer */
   /* ************************************************************************ */
@@ -52,7 +56,7 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
 
   @Override
   public Data GetAt(Natural num) {
-    return this.arr[(int) ((this.start + num.ToLong()) % Capacity().ToLong())];
+    return this.arr[IndexCircular(num)];
   }
 
   /* ************************************************************************ */
@@ -61,7 +65,7 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
 
   @Override
   public void SetAt(Data dat, Natural num) {
-    this.arr[(int) ((this.start + num.ToLong()) % Capacity().ToLong())] = dat;
+    this.arr[IndexCircular(num)] = dat;
   }
 
   /* ************************************************************************ */
@@ -70,13 +74,27 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
 
   @Override
   public void ShiftLeft(Natural pos, Natural num) {
-    long idx = (this.start + pos.ToLong()) % Capacity().ToLong();
-    super.ShiftLeft(Natural.Of(idx), num);
+    long idx = ExcIfOutOfBound(num);
+    long size = Size().ToLong();
+    long len = num.ToLong();
+    len = (len <= size - idx) ? len : size - idx;
+    if (idx >= size - (idx + len)) {
+      super.ShiftLeft(pos, num);
+      return;
+    }
+
+    long iniwrt = idx - 1 + len;
+    long wrt = iniwrt;
+    for (long rdr = wrt - len; rdr >= 0; rdr--, wrt--) {
+      Natural natrdr = Natural.Of(rdr);
+      SetAt(GetAt(natrdr), Natural.Of(wrt));
+      SetAt(null, natrdr);
+    }
+    for (; iniwrt - wrt < len; wrt--)
+      SetAt(null, Natural.Of(wrt));
+
+    start = (start + len) % arr.length;
   }
 
-  @Override
-  public void ShiftRight(Natural pos, Natural num) {
-    long idx = (this.start + pos.ToLong()) % Capacity().ToLong();
-    super.ShiftRight(Natural.Of(idx), num);
-  }
+  // TODO: ShiftRight 
 }
