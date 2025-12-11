@@ -33,8 +33,13 @@ public interface Set<Data> extends Collection<Data> { // Must extend Collection
 
   // Intersection
   default void Intersection(Set<Data> set) {
-    if (set == null || set.IsEmpty())
+    if (set == null)
       return;
+
+    if (set.IsEmpty()) {
+      Clear();
+      return;
+    }
 
     FIterator().ForEachForward(
         dat -> {
