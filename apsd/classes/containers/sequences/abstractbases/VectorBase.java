@@ -35,7 +35,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
   }
 
   // NewVector
-  abstract void NewVector(Data[] dat);
+  abstract protected void NewVector(Data[] dat);
 
   @SuppressWarnings("unchecked")
   protected void ArrayAlloc(Natural newsize) {
