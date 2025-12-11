@@ -35,10 +35,12 @@ abstract public class VectorBase<Data> implements Vector<Data> {
   }
 
   // NewVector
-  abstract protected void NewVector(Data[] dat);
+  abstract protected void NewVector(Data[] arr);
 
   @SuppressWarnings("unchecked")
   protected void ArrayAlloc(Natural newsize) {
+    if (newsize == null)
+      throw new NullPointerException("Natural newsize cannot be null!");
     long size = newsize.ToLong();
     if (size >= Integer.MAX_VALUE) {
       throw new ArithmeticException("Overflow: size cannot exceed Integer.MAX_VALUE!");
@@ -54,7 +56,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
   public void Clear() {
     long size = Size().ToLong();
     for (int i = 0; i < size; i++)
-      arr[i] = null;
+      SetAt(null, Natural.Of(i));
   }
 
   /* ************************************************************************ */

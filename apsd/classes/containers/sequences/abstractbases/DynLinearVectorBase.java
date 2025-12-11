@@ -1,38 +1,109 @@
 package apsd.classes.containers.sequences.abstractbases;
 
-// import apsd.classes.utilities.Natural;
-// import apsd.interfaces.containers.base.TraversableContainer;
-// import apsd.interfaces.containers.sequences.DynVector;
+import apsd.classes.utilities.Natural;
+import apsd.interfaces.containers.base.TraversableContainer;
+import apsd.interfaces.containers.sequences.DynVector;
 
 /** Object: Abstract dynamic linear vector base implementation. */
-abstract public class DynLinearVectorBase<Data> { // Must extend LinearVectorBase and implement DynVector
+abstract public class DynLinearVectorBase<Data> extends LinearVectorBase<Data> implements DynVector<Data> { // Must
+                                                                                                            // extend
+                                                                                                            // LinearVectorBase
+                                                                                                            // and
+                                                                                                            // implement
+                                                                                                            // DynVector
 
-  // protected long size = 0L;
+  protected long size = 0L;
 
   // DynLinearVectorBase
+  public DynLinearVectorBase(Natural size) {
+    super(size);
+    this.size = size.ToLong();
+  }
+
+  public DynLinearVectorBase(TraversableContainer<Data> container) {
+    super(container);
+    this.size = container.Size().ToLong();
+  }
+
+  protected DynLinearVectorBase(Data[] arr, long size) {
+    super(arr);
+    this.size = size;
+  }
+
+  @Override
+  protected void ArrayAlloc(Natural newsize) {
+    super.ArrayAlloc(newsize);
+    this.size = newsize.ToLong();
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from Container                        */
+  /* Override specific member functions from Container */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public Natural Size() {
+    return Natural.Of(this.size);
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from ClearableContainer               */
+  /* Override specific member functions from ClearableContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public void Clear() {
+    super.Clear();
+    this.size = 0L;
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from ReallocableContainer             */
+  /* Override specific member functions from ReallocableContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  @SuppressWarnings("unchecked")
+  public void Realloc(Natural newsize) {
+    if (newsize == null)
+      throw new NullPointerException("Natural newsize cannot be null!");
+    long nsize = newsize.ToLong();
+    if (nsize >= Integer.MAX_VALUE) {
+      throw new ArithmeticException("Overflow: newsize cannot exceed Integer.MAX_VALUE!");
+    } else if (newsize.compareTo(Capacity()) == 0) {
+      return;
+    }
+    Data[] newArr = (Data[]) new Object[(int) nsize];
+    for (long i = 0; i < ((nsize < this.size) ? nsize : this.size); i++) {
+      newArr[(int) i] = this.arr[(int) i];
+    }
+    this.arr = newArr;
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from ResizableContainer               */
+  /* Override specific member functions from ResizableContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public void Expand(Natural num) {
+    if (num == null)
+      throw new NullPointerException("Natural num cannot be null!");
+
+    this.size += num.ToLong();
+    while (this.size > Capacity().ToLong()) {
+      Grow();
+    }
+  }
+
+  @Override
+  public void Reduce(Natural num) {
+    if (num == null)
+      throw new NullPointerException("Natural num cannot be null!");
+    long nsize = this.size - num.ToLong();
+    if (nsize < 0L)
+      nsize = 0L;
+    this.size = nsize;
+    
+    while (this.size < (Capacity().ToLong() / SHRINK_FACTOR)) {
+      Shrink();
+    }
+  }
 
 }

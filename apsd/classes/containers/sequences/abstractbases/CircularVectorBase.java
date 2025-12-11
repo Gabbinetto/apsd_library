@@ -97,29 +97,4 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
   }
 
   // TODO: ShiftRight
-  @Override
-  public void ShiftRight(Natural pos, Natural num) {
-    long idx = ExcIfOutOfBound(num);
-    long size = Size().ToLong();
-    long len = num.ToLong();
-    len = (len <= size - idx) ? len : size - idx;
-    if (idx >= size - (idx + len)) {
-      super.ShiftRight(pos, num);
-      return;
-    }
-
-    long iniwrt = idx + 1 - len;
-    long wrt = iniwrt;
-    for (long rdr = wrt + len; rdr < size; rdr++, wrt++) {
-      Natural natrdr = Natural.Of(rdr);
-      SetAt(GetAt(natrdr), Natural.Of(wrt));
-      SetAt(null, natrdr);
-    }
-    for (; wrt - iniwrt < len; wrt++)
-      SetAt(null, Natural.Of(wrt));
-
-    start = (start - len) % arr.length;
-    if (start < 0)
-      start += arr.length;
-  }
 }
