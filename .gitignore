@@ -1,0 +1,8 @@
+# VS Code
+.vscode/
+
+# Java
+*.class
+
+# Project specific
+test/
