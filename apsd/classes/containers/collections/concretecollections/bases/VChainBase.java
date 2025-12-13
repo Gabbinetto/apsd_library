@@ -1,65 +1,196 @@
 package apsd.classes.containers.collections.concretecollections.bases;
 
-// import apsd.classes.containers.sequences.DynCircularVector;
-// import apsd.classes.utilities.Natural;
-// import apsd.interfaces.containers.base.TraversableContainer;
-// import apsd.interfaces.containers.collections.Chain;
-// import apsd.interfaces.containers.iterators.BackwardIterator;
-// import apsd.interfaces.containers.iterators.ForwardIterator;
-// import apsd.interfaces.containers.iterators.MutableForwardIterator;
-// import apsd.interfaces.containers.sequences.DynVector;
-// import apsd.interfaces.containers.sequences.Sequence;
-// import apsd.interfaces.traits.Predicate;
+import apsd.classes.containers.sequences.DynCircularVector;
+import apsd.classes.utilities.Natural;
+import apsd.interfaces.containers.base.TraversableContainer;
+import apsd.interfaces.containers.collections.Chain;
+import apsd.interfaces.containers.iterators.MutableForwardIterator;
+import apsd.interfaces.containers.iterators.MutableBackwardIterator;
+import apsd.interfaces.containers.sequences.DynVector;
+import apsd.interfaces.containers.sequences.Sequence;
+import apsd.interfaces.traits.Predicate;
 
 /** Object: Abstract list base implementation on (dynamic circular) vector. */
-abstract public class VChainBase<Data> { // Must implement Chain
+abstract public class VChainBase<Data> implements Chain<Data> { // Must implement Chain
 
-  // protected final DynVector<Data> vec;
+  protected final DynVector<Data> vec;
 
   // VChainBase
+  public VChainBase() {
+    this.vec = new DynCircularVector<>();
+  }
+
+  public VChainBase(DynVector<Data> vec) {
+    this.vec = vec;
+  }
+
+  public VChainBase(TraversableContainer<Data> con) {
+    this.vec = new DynCircularVector<>(con);
+  }
 
   // NewChain
+  abstract protected VChainBase<Data> NewChain(DynVector<Data> vec);
 
   /* ************************************************************************ */
-  /* Override specific member functions from Container                        */
+  /* Override specific member functions from Container */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public Natural Size() {
+    return vec.Size();
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from ClearableContainer               */
+  /* Override specific member functions from ClearableContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public void Clear() {
+    vec.Clear();
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from RemovableContainer               */
+  /* Override specific member functions from RemovableContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public boolean Remove(Data dat) {
+    Natural idx = vec.Search(dat);
+    if (idx != null) {
+      vec.RemoveAt(idx);
+      return true;
+    }
+    return false;
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from IterableContainer                */
+  /* Override specific member functions from IterableContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public MutableForwardIterator<Data> FIterator() {
+    return new MutableForwardIterator<Data>() {
+
+      private long index = 0;
+
+      @Override
+      public boolean IsValid() {
+        return index < vec.Size().ToLong();
+      }
+
+      @Override
+      public void SetCurrent(Data dat) {
+        vec.SetAt(dat, Natural.Of(index));
+      }
+
+      @Override
+      public Data DataNNext() {
+        index++;
+        if (IsValid()) {
+          return vec.GetAt(Natural.Of(index));
+        }
+        return null;
+      }
+
+      @Override
+      public void Reset() {
+        index = 0;
+      }
+
+      @Override
+      public Data GetCurrent() {
+        if (!IsValid()) {
+          throw new IndexOutOfBoundsException(index);
+        }
+        return vec.GetAt(Natural.Of(index));
+      }
+
+    };
+  }
+
+  @Override
+  public MutableBackwardIterator<Data> BIterator() {
+    return new MutableBackwardIterator<Data>() {
+
+      private long index = vec.Size().Decrement().ToLong();
+
+      @Override
+      public boolean IsValid() {
+        return index > -1;
+      }
+
+      @Override
+      public void SetCurrent(Data dat) {
+        vec.SetAt(dat, Natural.Of(index));
+      }
+
+      @Override
+      public Data DataNPrev() {
+        index--;
+        if (IsValid()) {
+          return vec.GetAt(Natural.Of(index));
+        }
+        return null;
+      }
+
+      @Override
+      public void Reset() {
+        index = vec.Size().Decrement().ToLong();
+      }
+
+      @Override
+      public Data GetCurrent() {
+        if (!IsValid()) {
+          throw new IndexOutOfBoundsException(index);
+        }
+        return vec.GetAt(Natural.Of(index));
+      }
+
+    };
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from Sequence                         */
+  /* Override specific member functions from Sequence */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public Data GetAt(Natural num) {
+    return vec.GetAt(num);
+  }
+
+  @Override
+  public Sequence<Data> SubSequence(Natural start, Natural end) {
+    return vec.SubSequence(start, end);
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from RemovableAtSequence              */
+  /* Override specific member functions from RemovableAtSequence */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public Data AtNRemove(Natural num) {
+    return vec.AtNRemove(num);
+  }
 
   /* ************************************************************************ */
-  /* Override specific member functions from Collection                       */
+  /* Override specific member functions from Collection */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public boolean Filter(Predicate<Data> fun) {
+    Natural oldsize = Size();
+    if (fun == null)
+      return false;
+
+    MutableBackwardIterator<Data> itr = BIterator();
+    while (itr.IsValid()) {
+      Data dat = itr.GetCurrent();
+      if (fun.Apply(dat))
+        Remove(dat);
+      itr.Prev();
+    }
+
+    return oldsize.compareTo(Size()) != 0;
+  }
 
 }
