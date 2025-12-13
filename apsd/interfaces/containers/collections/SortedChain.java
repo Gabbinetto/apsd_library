@@ -11,12 +11,56 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
 
   // SearchPredecessor
   default Natural SearchPredecessor(Data dat) {
-    return Search(Predecessor(dat));
+    long low = 0, high = Size().ToLong() - 1;
+    long mid = -1;
+    while (low <= high) {
+      mid = low + ((high + low) / 2L);
+
+      int comparison = dat.compareTo(GetAt(Natural.Of(mid)));
+
+      if (comparison == 0)
+        break;
+      else if (comparison < 0) {
+        high = mid - 1L;
+      } else if (comparison > 0) {
+        low = mid + 1L;
+      }
+    }
+
+    while (dat.compareTo(GetAt(Natural.Of(mid))) <= 0) {
+      mid--;
+      if (mid < 0)
+        return null;
+    }
+
+    return Natural.Of(mid);
   }
 
   // SearchSuccessor
   default Natural SearchSuccessor(Data dat) {
-    return Search(Successor(dat));
+    long low = 0, high = Size().ToLong() - 1;
+    long mid = -1;
+    while (low <= high) {
+      mid = low + ((high + low) / 2L);
+
+      int comparison = dat.compareTo(GetAt(Natural.Of(mid)));
+
+      if (comparison == 0)
+        break;
+      else if (comparison < 0) {
+        high = mid - 1L;
+      } else if (comparison > 0) {
+        low = mid + 1L;
+      }
+    }
+
+    while (dat.compareTo(GetAt(Natural.Of(mid))) >= 0) {
+      mid++;
+      if (mid >= Size().ToLong())
+        return null;
+    }
+
+    return Natural.Of(mid);
   }
 
   /* ************************************************************************ */
@@ -59,61 +103,37 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
 
   @Override
   default Data Predecessor(Data dat) {
-    Natural idx = Search(dat);
-    if (idx.compareTo(Natural.ZERO) == 0)
-      return null;
-
-    return GetAt(idx.Decrement());
+    return GetAt(SearchPredecessor(dat));
   }
 
   @Override
   default Data Successor(Data dat) {
-    Natural idx = Search(dat);
-    if (idx.compareTo(Size().Decrement()) == 0)
-      return null;
-
-    return GetAt(idx.Increment());
+    return GetAt(SearchSuccessor(dat));
   }
 
   @Override
   default Data PredecessorNRemove(Data dat) {
-    Natural idx = Search(dat);
-    if (idx.compareTo(Natural.ZERO) <= 0)
+    Natural idx = SearchPredecessor(dat);
+    if (idx == null)
       return null;
-    idx = idx.Decrement();
-    Data prev = GetAt(idx);
+    Data pred = GetAt(idx);
     RemoveAt(idx);
-    return prev;
+    return pred;
   }
 
   @Override
   default Data SuccessorNRemove(Data dat) {
-    Natural idx = Search(dat);
-    if (idx.compareTo(Size().Decrement()) >= 0)
+    Natural idx = SearchSuccessor(dat);
+    if (idx == null)
       return null;
-    idx = idx.Increment();
     Data succ = GetAt(idx);
     RemoveAt(idx);
     return succ;
   }
 
-  @Override
-  default void RemovePredecessor(Data dat) {
-    Natural idx = Search(dat);
-    if (idx.compareTo(Natural.ZERO) <= 0)
-      return;
-    idx = idx.Decrement();
-    RemoveAt(idx);
-  }
+  // RemovePredecessor
 
-  @Override
-  default void RemoveSuccessor(Data dat) {
-    Natural idx = Search(dat);
-    if (idx.compareTo(Size().Decrement()) >= 0)
-      return;
-    idx = idx.Increment();
-    RemoveAt(idx);
-  }
+  // RemoveSuccessor
 
   /* ************************************************************************ */
   /* Override specific member functions from Set */
