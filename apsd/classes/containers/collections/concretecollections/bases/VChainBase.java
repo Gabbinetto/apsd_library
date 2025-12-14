@@ -86,10 +86,10 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
       @Override
       public Data DataNNext() {
         index++;
-        if (IsValid()) {
-          return vec.GetAt(Natural.Of(index));
+        if (!IsValid()) {
+          throw new IllegalStateException("Iterator terminated!");
         }
-        return null;
+        return vec.GetAt(Natural.Of(index));
       }
 
       @Override
@@ -100,7 +100,7 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
       @Override
       public Data GetCurrent() {
         if (!IsValid()) {
-          throw new IndexOutOfBoundsException(index);
+          throw new IllegalStateException("Iterator terminated!");
         }
         return vec.GetAt(Natural.Of(index));
       }
@@ -127,10 +127,10 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
       @Override
       public Data DataNPrev() {
         index--;
-        if (IsValid()) {
-          return vec.GetAt(Natural.Of(index));
+        if (!IsValid()) {
+          throw new IllegalStateException("Iterator terminated!");
         }
-        return null;
+        return vec.GetAt(Natural.Of(index));
       }
 
       @Override
@@ -141,7 +141,7 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
       @Override
       public Data GetCurrent() {
         if (!IsValid()) {
-          throw new IndexOutOfBoundsException(index);
+          throw new IllegalAccessError("Iterator terminated!");
         }
         return vec.GetAt(Natural.Of(index));
       }

@@ -90,9 +90,9 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       @Override
       public Data DataNNext() {
         index++;
-        if (IsValid())
-          return arr[index];
-        return null;
+        if (!IsValid())
+          throw new IllegalStateException("Iterator terminated!");
+        return arr[index];
       }
 
       @Override
@@ -103,7 +103,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       @Override
       public Data GetCurrent() {
         if (!IsValid())
-          throw new IndexOutOfBoundsException(index);
+          throw new IllegalStateException("Iterator terminated!");
         return arr[index];
       }
     };
@@ -127,9 +127,9 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       @Override
       public Data DataNPrev() {
         index--;
-        if (IsValid())
-          return arr[index];
-        return null;
+        if (!IsValid())
+          throw new IllegalStateException("Iterator terminated!");
+        return arr[index];
       }
 
       @Override
@@ -140,7 +140,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       @Override
       public Data GetCurrent() {
         if (!IsValid())
-          throw new IndexOutOfBoundsException(index);
+          throw new IllegalStateException("Iterator terminated!");
         return arr[index];
       }
     };
