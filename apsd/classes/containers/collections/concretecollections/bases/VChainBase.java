@@ -160,7 +160,7 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
 
   @Override
   public Sequence<Data> SubSequence(Natural start, Natural end) {
-    return vec.SubSequence(start, end);
+    return (Sequence<Data>) NewChain(vec.SubVector(start, end));
   }
 
   /* ************************************************************************ */
