@@ -8,7 +8,14 @@ import apsd.interfaces.containers.base.RemovableContainer;
 import apsd.interfaces.containers.iterators.ForwardIterator;
 import apsd.interfaces.traits.Predicate;
 
-public interface Collection<Data> extends ClearableContainer, InsertableContainer<Data>, RemovableContainer<Data>, IterableContainer<Data> { // Must extend ClearableContainer, InsertableContainer, RemovableContainer, and IterableContainer
+public interface Collection<Data>
+    extends ClearableContainer, InsertableContainer<Data>, RemovableContainer<Data>, IterableContainer<Data> { // Must
+                                                                                                               // extend
+                                                                                                               // ClearableContainer,
+                                                                                                               // InsertableContainer,
+                                                                                                               // RemovableContainer,
+                                                                                                               // and
+                                                                                                               // IterableContainer
 
   default boolean Filter(Predicate<Data> fun) {
     Natural oldsize = Size();
@@ -28,15 +35,12 @@ public interface Collection<Data> extends ClearableContainer, InsertableContaine
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from ClearableContainer               */
+  /* Override specific member functions from ClearableContainer */
   /* ************************************************************************ */
 
   @Override
   default void Clear() {
-    FIterator().ForEachForward(dat -> {
-      Remove(dat);
-      return false;
-    });
+    Filter(dat -> false);
   }
 
 }
