@@ -178,19 +178,37 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
 
   @Override
   public boolean Filter(Predicate<Data> fun) {
-    Natural oldsize = Size();
-    if (fun == null)
+    long deletions = 0;
+    if (fun == null) {
       return false;
-
-    MutableBackwardIterator<Data> itr = BIterator();
-    while (itr.IsValid()) {
-      Data dat = itr.GetCurrent();
-      if (fun.Apply(dat))
-        Remove(dat);
-      itr.Prev();
     }
 
-    return oldsize.compareTo(Size()) != 0;
+    MutableForwardIterator<Data> wrt = FIterator();
+    for (; wrt.IsValid(); wrt.Next()) {
+      Data dat = wrt.GetCurrent();
+      if (!fun.Apply(dat)) {
+        wrt.SetCurrent(null);
+        deletions++;
+      }
+    }
+
+    if (deletions == 0)
+      return false;
+
+    wrt.Reset();
+    MutableForwardIterator<Data> rdr = FIterator();
+    for (; rdr.IsValid(); rdr.Next()) {
+      Data current = rdr.GetCurrent();
+      if (current == null)
+        continue;
+
+      wrt.SetCurrent(current);
+      rdr.SetCurrent(null);
+    }
+
+    vec.Reduce(Natural.Of(deletions));
+    return true;
+
   }
 
 }
