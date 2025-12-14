@@ -3,6 +3,7 @@ package apsd.classes.containers.sequences;
 import apsd.classes.containers.sequences.abstractbases.DynCircularVectorBase;
 import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.base.TraversableContainer;
+import apsd.classes.containers.sequences.abstractbases.VectorBase;
 
 /** Object: Concrete dynamic circular vector implementation. */
 public class DynCircularVector<Data> extends DynCircularVectorBase<Data> { // Must extend DynCircularVectorBase
@@ -25,10 +26,8 @@ public class DynCircularVector<Data> extends DynCircularVectorBase<Data> { // Mu
 
   // NewVector
   @Override
-  protected void NewVector(Data[] arr) {
-    this.arr = arr;
-    this.size = arr.length;
-    this.start = 0L;
+  protected VectorBase<Data> NewVector(Data[] arr) {
+    return new DynCircularVector<Data>(arr);
   }
 
 }

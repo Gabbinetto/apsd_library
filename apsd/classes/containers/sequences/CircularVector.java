@@ -1,6 +1,7 @@
 package apsd.classes.containers.sequences;
 
 import apsd.classes.containers.sequences.abstractbases.CircularVectorBase;
+import apsd.classes.containers.sequences.abstractbases.VectorBase;
 import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.base.TraversableContainer;
 
@@ -25,9 +26,8 @@ public class CircularVector<Data> extends CircularVectorBase<Data> { // Must ext
 
   // NewVector
   @Override
-  protected void NewVector(Data[] arr) {
-    this.arr = arr;
-    this.start = 0L;
+  protected VectorBase<Data> NewVector(Data[] arr) {
+    return new CircularVector<Data>(arr);
   }
 
 }

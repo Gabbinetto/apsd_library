@@ -35,7 +35,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
   }
 
   // NewVector
-  abstract protected void NewVector(Data[] arr);
+  abstract protected VectorBase<Data> NewVector(Data[] arr);
 
   @SuppressWarnings("unchecked")
   protected void ArrayAlloc(Natural newsize) {
@@ -161,9 +161,15 @@ abstract public class VectorBase<Data> implements Vector<Data> {
   /* ************************************************************************ */
 
   @Override
+  @SuppressWarnings("unchecked")
   public MutableSequence<Data> SubSequence(Natural start, Natural end) {
-    // TODO: Capire come fare :(
-    return null;
+    Data[] newArr = (Data[]) new Object[(int) (end.ToLong() - start.ToLong() + 1)];
+    int idx = 0;
+    for (long i = start.ToLong(); i <= end.ToLong(); i++) {
+      newArr[idx++] = GetAt(Natural.Of(i));
+    }
+
+    return NewVector(newArr);
   }
 
 }

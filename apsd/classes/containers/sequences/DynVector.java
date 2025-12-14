@@ -1,6 +1,7 @@
 package apsd.classes.containers.sequences;
 
 import apsd.classes.containers.sequences.abstractbases.DynLinearVectorBase;
+import apsd.classes.containers.sequences.abstractbases.VectorBase;
 import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.base.TraversableContainer;
 
@@ -25,9 +26,8 @@ public class DynVector<Data> extends DynLinearVectorBase<Data> { // Must extend 
 
   // NewVector
   @Override
-  protected void NewVector(Data[] arr) {
-    this.arr = arr;
-    this.size = arr.length;
+  protected VectorBase<Data> NewVector(Data[] arr) {
+    return new DynVector<Data>(arr);
   }
 
 }
