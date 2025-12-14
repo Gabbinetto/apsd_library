@@ -1,7 +1,5 @@
 package apsd.classes.containers.collections.concretecollections.bases;
 
-import java.util.List;
-
 import apsd.classes.containers.sequences.Vector;
 import apsd.classes.utilities.Box;
 import apsd.classes.utilities.MutableNatural;
@@ -379,7 +377,6 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
 
   @Override
   public boolean Filter(Predicate<Data> fun) {
-    MutableNatural idx = new MutableNatural(0);
     long oldSize = size.ToLong();
 
     Box<LLNode<Data>> prev = new Box<>();
