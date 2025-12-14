@@ -47,7 +47,7 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
   }
 
   // NewChain
-  abstract public Chain<Data> NewChain(long size, LLNode<Data> head, LLNode<Data> tail);
+  abstract protected Chain<Data> NewChain(long size, LLNode<Data> head, LLNode<Data> tail);
 
   /* ************************************************************************ */
   /* Specific member functions from LLChainBase */
