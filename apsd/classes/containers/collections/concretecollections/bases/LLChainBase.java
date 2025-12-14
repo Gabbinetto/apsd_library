@@ -53,46 +53,6 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
   /* Specific member functions from LLChainBase */
   /* ************************************************************************ */
 
-  @Override
-  public MutableForwardIterator<Data> FIterator() {
-    return new MutableForwardIterator<Data>() {
-      private ForwardIterator<Box<LLNode<Data>>> refiter = FRefIterator();
-
-      @Override
-      public boolean IsValid() {
-        return refiter.IsValid();
-      }
-
-      @Override
-      public void Reset() {
-        refiter.Reset();
-      }
-
-      @Override
-      public Data GetCurrent() {
-        return refiter.GetCurrent().Get().Get();
-      }
-
-      @Override
-      public void SetCurrent(Data dat) {
-        if (dat == null)
-          return;
-        refiter.GetCurrent().Get().Set(dat);
-      }
-
-      @Override
-      public void Next() {
-        refiter.Next();
-      }
-
-      @Override
-      public Data DataNNext() {
-        refiter.Next();
-        return refiter.GetCurrent().Get().Get();
-      }
-    };
-  };
-
   protected ForwardIterator<Box<LLNode<Data>>> FRefIterator() {
     return new ListFRefIterator();
   }
@@ -134,46 +94,6 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
       return oldCur;
     }
   }
-
-  @Override
-  public MutableBackwardIterator<Data> BIterator() {
-    return new MutableBackwardIterator<Data>() {
-      private BackwardIterator<Box<LLNode<Data>>> refiter = BRefIterator();
-
-      @Override
-      public boolean IsValid() {
-        return refiter.IsValid();
-      }
-
-      @Override
-      public void Reset() {
-        refiter.Reset();
-      }
-
-      @Override
-      public Data GetCurrent() {
-        return refiter.GetCurrent().Get().Get();
-      }
-
-      @Override
-      public void SetCurrent(Data dat) {
-        if (dat == null)
-          return;
-        refiter.GetCurrent().Get().Set(dat);
-      }
-
-      @Override
-      public void Prev() {
-        refiter.Prev();
-      }
-
-      @Override
-      public Data DataNPrev() {
-        refiter.Prev();
-        return refiter.GetCurrent().Get().Get();
-      }
-    };
-  };
 
   protected BackwardIterator<Box<LLNode<Data>>> BRefIterator() {
     return new ListBRefIterator();
@@ -280,7 +200,85 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
   /* Override specific member functions from IterableContainer */
   /* ************************************************************************ */
 
-  // ...
+  @Override
+  public MutableForwardIterator<Data> FIterator() {
+    return new MutableForwardIterator<Data>() {
+      private ForwardIterator<Box<LLNode<Data>>> refiter = FRefIterator();
+
+      @Override
+      public boolean IsValid() {
+        return refiter.IsValid();
+      }
+
+      @Override
+      public void Reset() {
+        refiter.Reset();
+      }
+
+      @Override
+      public Data GetCurrent() {
+        return refiter.GetCurrent().Get().Get();
+      }
+
+      @Override
+      public void SetCurrent(Data dat) {
+        if (dat == null)
+          return;
+        refiter.GetCurrent().Get().Set(dat);
+      }
+
+      @Override
+      public void Next() {
+        refiter.Next();
+      }
+
+      @Override
+      public Data DataNNext() {
+        refiter.Next();
+        return refiter.GetCurrent().Get().Get();
+      }
+    };
+  };
+
+  @Override
+  public MutableBackwardIterator<Data> BIterator() {
+    return new MutableBackwardIterator<Data>() {
+      private BackwardIterator<Box<LLNode<Data>>> refiter = BRefIterator();
+
+      @Override
+      public boolean IsValid() {
+        return refiter.IsValid();
+      }
+
+      @Override
+      public void Reset() {
+        refiter.Reset();
+      }
+
+      @Override
+      public Data GetCurrent() {
+        return refiter.GetCurrent().Get().Get();
+      }
+
+      @Override
+      public void SetCurrent(Data dat) {
+        if (dat == null)
+          return;
+        refiter.GetCurrent().Get().Set(dat);
+      }
+
+      @Override
+      public void Prev() {
+        refiter.Prev();
+      }
+
+      @Override
+      public Data DataNPrev() {
+        refiter.Prev();
+        return refiter.GetCurrent().Get().Get();
+      }
+    };
+  };
 
   /* ************************************************************************ */
   /* Override specific member functions from Sequence */
