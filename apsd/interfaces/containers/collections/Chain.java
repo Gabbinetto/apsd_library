@@ -36,9 +36,6 @@ public interface Chain<Data> extends Set<Data>, RemovableAtSequence<Data> { // M
   /* Override specific member functions from Sequence */
   /* ************************************************************************ */
 
-  @Override
-  default Natural Search(Data dat) {
-    // TODO: idk
-  }
+  // TODO: Search
 
 }
