@@ -9,7 +9,7 @@ public interface BackwardIterator<Data> extends Iterator<Data> { // Must extend 
   // Prev
   default void Prev(Natural amount) {
     long natam = amount.ToLong();
-    for (long i = 0L; i < natam; i++)
+    for (long i = 0L; i < natam && IsValid(); i++)
       Prev();
   }
 
