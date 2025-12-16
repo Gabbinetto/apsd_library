@@ -61,6 +61,14 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
 
     private Box<LLNode<Data>> cur = headref;
 
+    public ListFRefIterator() {
+      Reset();
+    }
+
+    public ListFRefIterator(ListFRefIterator iter) {
+      cur = iter.cur;
+    }
+
     @Override
     public boolean IsValid() {
       return cur != null && !cur.IsNull();
