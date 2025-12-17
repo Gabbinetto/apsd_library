@@ -67,11 +67,15 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
 
   @Override
   default Data Min() {
+    if (Size().IsZero())
+      return null;
     return GetAt(Natural.ZERO);
   }
 
   @Override
   default Data Max() {
+    if (Size().IsZero())
+      return null;
     return GetAt(Size().Decrement());
   }
 

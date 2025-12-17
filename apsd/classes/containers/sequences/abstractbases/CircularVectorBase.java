@@ -42,8 +42,11 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
   @SuppressWarnings("unchecked")
   public void Realloc(Natural newsize) {
     long size = newsize.ToLong();
-    if (size > Integer.MAX_VALUE)
-      throw new ArithmeticException("Overflow: size cannot exceed Integer.MAX_VALUE!");
+    if (size >= Integer.MAX_VALUE) {
+      throw new ArithmeticException("Overflow: newsize cannot exceed Integer.MAX_VALUE!");
+    } else if (newsize.compareTo(Capacity()) == 0) {
+      return;
+    }
 
     Data[] newArr = (Data[]) new Object[(int) newsize.ToLong()];
     for (int i = 0; i < size; i++)

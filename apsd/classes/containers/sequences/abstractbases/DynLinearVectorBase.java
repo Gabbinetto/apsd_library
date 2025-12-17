@@ -98,9 +98,9 @@ abstract public class DynLinearVectorBase<Data> extends LinearVectorBase<Data> i
     if (nsize < 0L)
       nsize = 0L;
 
-    Shrink();
-
     this.size = nsize;
+
+    Shrink();
   }
 
 }

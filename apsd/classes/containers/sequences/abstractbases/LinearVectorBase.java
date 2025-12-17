@@ -30,8 +30,10 @@ abstract public class LinearVectorBase<Data> extends VectorBase<Data> { // Must 
     if (size > Integer.MAX_VALUE)
       throw new ArithmeticException("Overflow: size cannot exceed Integer.MAX_VALUE!");
 
-    Data[] newArr = (Data[]) new Object[(int) newsize.ToLong()];
-    System.arraycopy(this.arr, 0, newArr, 0, (int) newsize.ToLong());
+    Data[] newArr = (Data[]) new Object[(int) size];
+    for (int i = 0; i < (size < this.arr.length ? size : this.arr.length); i++)
+      newArr[i] = this.arr[i];  
+    this.arr = newArr;
   }
 
   /* ************************************************************************ */

@@ -81,4 +81,14 @@ abstract public class WOrderedSetBase<Data extends Comparable<? super Data>, Chn
     return chn.SuccessorNRemove(dat);
   }
 
+  @Override
+  public Data MinNRemove() {
+    return chn.MinNRemove();
+  }
+
+  @Override
+  public Data MaxNRemove() {
+    return chn.MaxNRemove();
+  }
+
 }

@@ -20,12 +20,15 @@ abstract public class VectorBase<Data> implements Vector<Data> {
     this.ArrayAlloc(size);
   }
 
+  @SuppressWarnings("unchecked")
   public VectorBase(TraversableContainer<Data> con) {
     if (con == null)
       throw new NullPointerException("TraversableContainer cannot be null!");
+    this.arr = (Data[]) new Object[(int) con.Size().ToLong()];
+
     final MutableNatural idx = new MutableNatural();
     con.TraverseForward((dat) -> {
-      SetAt(dat, idx.GetNDecrement());
+      SetAt(dat, idx.GetNIncrement());
       return false;
     });
   }
@@ -84,7 +87,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
 
       @Override
       public void SetCurrent(Data dat) {
-        arr[index] = dat;
+        SetAt(dat, Natural.Of(index));
       }
 
       @Override
@@ -103,7 +106,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       public Data GetCurrent() {
         if (!IsValid())
           throw new IllegalStateException("Iterator terminated!");
-        return arr[index];
+        return GetAt(Natural.Of(index));
       }
     };
   }
@@ -120,7 +123,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
 
       @Override
       public void SetCurrent(Data dat) {
-        arr[index] = dat;
+        SetAt(dat, Natural.Of(index));
       }
 
       @Override
@@ -139,7 +142,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       public Data GetCurrent() {
         if (!IsValid())
           throw new IllegalStateException("Iterator terminated!");
-        return arr[index];
+        return GetAt(Natural.Of(index));
       }
     };
   }
