@@ -28,6 +28,9 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
   }
 
   private int IndexCircular(Natural num) {
+    if (Size().ToLong() == 0L) {
+      throw new IndexOutOfBoundsException("CircularVectorBase IndexCircular(): sequence is empty.");
+    }
     return (int) ((this.start + ExcIfOutOfBound(num)) % arr.length);
   }
 

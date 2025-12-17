@@ -17,12 +17,14 @@ public interface BackwardIterator<Data> extends Iterator<Data> { // Must extend 
     Prev(Natural.Of(amount));
   }
 
-  default void Prev() {
-    DataNPrev();
-  }
+  void Prev();
 
   // DataNPrev
-  Data DataNPrev();
+  default Data DataNPrev() {
+    Data dat = GetCurrent();
+    Prev();
+    return dat;
+  }
 
   // ForEachBackward
   default boolean ForEachBackward(Predicate<Data> fun) {

@@ -13,15 +13,15 @@ public interface Vector<Data> extends ReallocableContainer, MutableSequence<Data
 
   default void ShiftLeft(Natural pos, Natural num) {
     long idx = ExcIfOutOfBound(pos);
-    long cap = Capacity().ToLong();
+    long size = Size().ToLong();
     long len = num.ToLong();
-    len = (len <= cap - idx - 1) ? len : cap - idx - 1;
+    len = (len <= size - idx - 1) ? len : size - idx - 1;
     if (len <= 0)
       return;
 
     long iniwrt = idx;
     long wrt = iniwrt;
-    for (long rdr = wrt + len; rdr < cap; rdr++, wrt++) {
+    for (long rdr = wrt + len; rdr < size; rdr++, wrt++) {
       Natural natrdr = Natural.Of(rdr);
       SetAt(GetAt(natrdr), Natural.Of(wrt));
       SetAt(null, natrdr);
@@ -48,13 +48,13 @@ public interface Vector<Data> extends ReallocableContainer, MutableSequence<Data
 
   default void ShiftRight(Natural pos, Natural num) {
     long idx = ExcIfOutOfBound(pos);
-    long cap = Capacity().ToLong();
+    long size = Size().ToLong();
     long len = num.ToLong();
-    len = (len <= cap - idx - 1) ? len : cap - idx - 1;
+    len = (len <= size - idx - 1) ? len : size - idx - 1;
     if (len <= 0)
       return;
 
-    long wrt = cap - 1;
+    long wrt = size - 1;
     for (long rdr = wrt - len; rdr >= idx; rdr--, wrt--) {
       Natural natrdr = Natural.Of(rdr);
       SetAt(GetAt(natrdr), Natural.Of(wrt));

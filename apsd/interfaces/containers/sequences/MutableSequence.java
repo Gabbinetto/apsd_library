@@ -40,6 +40,8 @@ public interface MutableSequence<Data> extends Sequence<Data>, MutableIterableCo
 
   // SetLast
   default void SetLast(Data dat) {
+    if (Size().IsZero())
+      throw new IndexOutOfBoundsException("MutableSequence SetLast(): sequence is empty.");
     SetAt(dat, Size().Decrement());
   }
 

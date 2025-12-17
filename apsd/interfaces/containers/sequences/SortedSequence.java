@@ -25,7 +25,7 @@ public interface SortedSequence<Data extends Comparable<? super Data>>
     // In ordine, quindi si può usare una ricerca binaria
     long low = 0, high = Size().ToLong() - 1;
     while (low <= high) {
-      long mid = low + ((high + low) / 2L);
+      long mid = low + ((high - low) / 2L);
 
       int comparison = dat.compareTo(GetAt(Natural.Of(mid)));
 

@@ -88,11 +88,10 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       }
 
       @Override
-      public Data DataNNext() {
-        index++;
+      public void Next() {
         if (!IsValid())
           throw new IllegalStateException("Iterator terminated!");
-        return arr[index];
+        index++;
       }
 
       @Override
@@ -125,11 +124,10 @@ abstract public class VectorBase<Data> implements Vector<Data> {
       }
 
       @Override
-      public Data DataNPrev() {
-        index--;
+      public void Prev() {
         if (!IsValid())
           throw new IllegalStateException("Iterator terminated!");
-        return arr[index];
+        index--;
       }
 
       @Override

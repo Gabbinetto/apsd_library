@@ -242,8 +242,7 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
 
       @Override
       public Data DataNNext() {
-        refiter.Next();
-        return refiter.GetCurrent().Get().Get();
+        return refiter.DataNNext().Get().Get();
       }
     };
   };
@@ -282,8 +281,7 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
 
       @Override
       public Data DataNPrev() {
-        refiter.Prev();
-        return refiter.GetCurrent().Get().Get();
+        return refiter.DataNPrev().Get().Get();
       }
     };
   };

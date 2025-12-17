@@ -14,7 +14,7 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
     long low = 0, high = Size().ToLong() - 1;
     long mid = -1;
     while (low <= high) {
-      mid = low + ((high + low) / 2L);
+      mid = low + ((high - low) / 2L);
 
       int comparison = dat.compareTo(GetAt(Natural.Of(mid)));
 
@@ -27,13 +27,11 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
       }
     }
 
-    while (dat.compareTo(GetAt(Natural.Of(mid))) <= 0) {
+    while (mid >= 0 && dat.compareTo(GetAt(Natural.Of(mid))) <= 0) {
       mid--;
-      if (mid < 0)
-        return null;
     }
 
-    return Natural.Of(mid);
+    return (mid >= 0) ? Natural.Of(mid) : null;
   }
 
   // SearchSuccessor
@@ -41,7 +39,7 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
     long low = 0, high = Size().ToLong() - 1;
     long mid = -1;
     while (low <= high) {
-      mid = low + ((high + low) / 2L);
+      mid = low + ((high - low) / 2L);
 
       int comparison = dat.compareTo(GetAt(Natural.Of(mid)));
 
@@ -54,13 +52,13 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
       }
     }
 
-    while (dat.compareTo(GetAt(Natural.Of(mid))) >= 0) {
+    while (mid >= 0 && dat.compareTo(GetAt(Natural.Of(mid))) >= 0) {
       mid++;
       if (mid >= Size().ToLong())
         return null;
     }
 
-    return Natural.Of(mid);
+    return (mid >= 0) ? Natural.Of(mid) : null;
   }
 
   /* ************************************************************************ */

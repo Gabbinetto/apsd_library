@@ -89,10 +89,8 @@ abstract public class DynCircularVectorBase<Data> extends CircularVectorBase<Dat
     if (num == null)
       throw new NullPointerException("Natural num cannot be null!");
 
+    Grow(num);
     this.size += num.ToLong();
-    while (this.size > Capacity().ToLong()) {
-      Grow();
-    }
   }
 
   @Override
@@ -102,11 +100,12 @@ abstract public class DynCircularVectorBase<Data> extends CircularVectorBase<Dat
     long nsize = this.size - num.ToLong();
     if (nsize < 0L)
       nsize = 0L;
-    this.size = nsize;
 
-    while (this.size < (Capacity().ToLong() / SHRINK_FACTOR)) {
+    while (nsize < (Capacity().ToLong() / SHRINK_FACTOR)) {
       Shrink();
     }
+    this.size = nsize;
+
   }
 
   /* ************************************************************************ */

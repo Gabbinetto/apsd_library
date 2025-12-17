@@ -17,12 +17,14 @@ public interface ForwardIterator<Data> extends Iterator<Data> { // Must extend I
     Next(Natural.Of(amount));
   }
 
-  default void Next() {
-    DataNNext();
-  }
+  void Next();
 
   // DataNNext
-  Data DataNNext();
+  default Data DataNNext() {
+    Data dat = GetCurrent();
+    Next();
+    return dat;
+  }
 
   default boolean ForEachForward(Predicate<Data> fun) {
     if (fun != null) {
