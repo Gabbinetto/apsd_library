@@ -101,9 +101,8 @@ abstract public class DynCircularVectorBase<Data> extends CircularVectorBase<Dat
     if (nsize < 0L)
       nsize = 0L;
 
-    while (nsize < (Capacity().ToLong() / SHRINK_FACTOR)) {
-      Shrink();
-    }
+    Shrink();
+    
     this.size = nsize;
 
   }

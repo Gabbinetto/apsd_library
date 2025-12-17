@@ -98,9 +98,7 @@ abstract public class DynLinearVectorBase<Data> extends LinearVectorBase<Data> i
     if (nsize < 0L)
       nsize = 0L;
 
-    while (nsize < (Capacity().ToLong() / SHRINK_FACTOR)) {
-      Shrink();
-    }
+    Shrink();
 
     this.size = nsize;
   }
