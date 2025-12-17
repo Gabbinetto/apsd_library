@@ -61,11 +61,17 @@ public class WStack<Data> implements Stack<Data> { // Must implement Stack
 
   @Override
   public void Pop() {
+    if (IsEmpty()) {
+      return;
+    }
     this.lst.RemoveLast();
   }
   
   @Override
   public Data Top() {
+    if (IsEmpty()) {
+      return null;
+    }
     return this.lst.GetLast();
   }
 

@@ -114,7 +114,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
   @Override
   public MutableBackwardIterator<Data> BIterator() {
     return new MutableBackwardIterator<Data>() {
-      private int index = (int) Size().Decrement().ToLong();
+      private int index = (IsEmpty()) ? -1 : (int) Size().Decrement().ToLong();
 
       @Override
       public boolean IsValid() {
@@ -135,7 +135,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
 
       @Override
       public void Reset() {
-        index = (int) Size().Decrement().ToLong();
+        index = (IsEmpty()) ? -1 : (int) Size().Decrement().ToLong();
       }
 
       @Override

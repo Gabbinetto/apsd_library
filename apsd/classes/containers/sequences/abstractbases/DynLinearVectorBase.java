@@ -75,6 +75,7 @@ abstract public class DynLinearVectorBase<Data> extends LinearVectorBase<Data> i
       newArr[(int) i] = this.arr[(int) i];
     }
     this.arr = newArr;
+    this.size = (nsize < this.size) ? nsize : this.size;
   }
 
   /* ************************************************************************ */

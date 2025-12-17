@@ -110,7 +110,7 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
   public MutableBackwardIterator<Data> BIterator() {
     return new MutableBackwardIterator<Data>() {
 
-      private long index = vec.Size().Decrement().ToLong();
+      private long index = (IsEmpty()) ? -1 : vec.Size().Decrement().ToLong();
 
       @Override
       public boolean IsValid() {
@@ -131,7 +131,7 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
 
       @Override
       public void Reset() {
-        index = vec.Size().Decrement().ToLong();
+        index = (IsEmpty()) ? -1 : vec.Size().Decrement().ToLong();
       }
 
       @Override

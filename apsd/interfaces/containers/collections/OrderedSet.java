@@ -45,6 +45,9 @@ public interface OrderedSet<Data extends Comparable<? super Data>> extends Set<D
 
   // Predecessor
   default Data Predecessor(Data dat) {
+    if (IsEmpty()) {
+      return null;
+    }
     ForwardIterator<Data> iter = FIterator();
     Data prev = iter.GetCurrent();
     iter.Next();
@@ -77,6 +80,9 @@ public interface OrderedSet<Data extends Comparable<? super Data>> extends Set<D
 
   // Successor
   default Data Successor(Data dat) {
+    if (IsEmpty()) {
+      return null;
+    }
     BackwardIterator<Data> iter = BIterator();
     Data succ = iter.DataNPrev();
     if (succ.equals(dat))

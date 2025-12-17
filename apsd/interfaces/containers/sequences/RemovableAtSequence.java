@@ -22,6 +22,9 @@ public interface RemovableAtSequence<Data> extends Sequence<Data> { // Must exte
 
   // FirstNRemove
   default Data FirstNRemove() {
+    if (IsEmpty()) {
+      throw new IndexOutOfBoundsException("Container is empty!");
+    }
     return AtNRemove(Natural.ZERO);
   }
 
@@ -32,6 +35,9 @@ public interface RemovableAtSequence<Data> extends Sequence<Data> { // Must exte
 
   // LastNRemove
   default Data LastNRemove() {
+    if (IsEmpty()) {
+      throw new IndexOutOfBoundsException("Container is empty!");
+    }
     return AtNRemove(Size().Decrement());
   }
 

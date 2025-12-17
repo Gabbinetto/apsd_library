@@ -41,17 +41,19 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
   @Override
   @SuppressWarnings("unchecked")
   public void Realloc(Natural newsize) {
-    long size = newsize.ToLong();
-    if (size >= Integer.MAX_VALUE) {
+    if (newsize == null)
+      throw new NullPointerException("Natural newsize cannot be null!");
+    long nsize = newsize.ToLong();
+    if (nsize >= Integer.MAX_VALUE) {
       throw new ArithmeticException("Overflow: newsize cannot exceed Integer.MAX_VALUE!");
     } else if (newsize.compareTo(Capacity()) == 0) {
       return;
     }
 
-    Data[] newArr = (Data[]) new Object[(int) newsize.ToLong()];
-    for (int i = 0; i < size; i++)
-      newArr[i] = GetAt(Natural.Of(i));
-
+    Data[] newArr = (Data[]) new Object[(int) nsize];
+    for (long i = 0; i < nsize; i++) {
+      newArr[(int) i] = GetAt(Natural.Of(i));
+    }
     this.arr = newArr;
     this.start = 0L;
   }

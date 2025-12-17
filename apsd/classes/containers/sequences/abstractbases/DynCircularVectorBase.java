@@ -78,6 +78,7 @@ abstract public class DynCircularVectorBase<Data> extends CircularVectorBase<Dat
     }
     this.arr = newArr;
     this.start = 0L;
+    this.size = (nsize < this.size) ? nsize : this.size;
   }
 
   /* ************************************************************************ */

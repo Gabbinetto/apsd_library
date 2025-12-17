@@ -26,13 +26,18 @@ abstract public class LinearVectorBase<Data> extends VectorBase<Data> { // Must 
   @Override
   @SuppressWarnings("unchecked")
   public void Realloc(Natural newsize) {
-    long size = newsize.ToLong();
-    if (size > Integer.MAX_VALUE)
-      throw new ArithmeticException("Overflow: size cannot exceed Integer.MAX_VALUE!");
-
-    Data[] newArr = (Data[]) new Object[(int) size];
-    for (int i = 0; i < (size < this.arr.length ? size : this.arr.length); i++)
-      newArr[i] = this.arr[i];  
+    if (newsize == null)
+      throw new NullPointerException("Natural newsize cannot be null!");
+    long nsize = newsize.ToLong();
+    if (nsize >= Integer.MAX_VALUE) {
+      throw new ArithmeticException("Overflow: newsize cannot exceed Integer.MAX_VALUE!");
+    } else if (newsize.compareTo(Capacity()) == 0) {
+      return;
+    }
+    Data[] newArr = (Data[]) new Object[(int) nsize];
+    for (long i = 0; i < nsize; i++) {
+      newArr[(int) i] = this.arr[(int) i];
+    }
     this.arr = newArr;
   }
 
