@@ -2,6 +2,7 @@ package apsd.classes.containers.collections.concretecollections;
 
 import apsd.classes.containers.collections.concretecollections.bases.VChainBase;
 import apsd.classes.utilities.Natural;
+import apsd.classes.utilities.MutableNatural;
 import apsd.interfaces.containers.base.TraversableContainer;
 import apsd.interfaces.containers.collections.SortedChain;
 import apsd.interfaces.containers.sequences.DynVector;
@@ -52,11 +53,34 @@ public class VSortedChain<Data extends Comparable<? super Data>> extends VChainB
     return true;
   }
 
-
   /* ************************************************************************ */
-  /* Override specific member functions from Chain                            */
+  /* Override specific member functions from Chain */
   /* ************************************************************************ */
 
-  // TODO: RemoveOccurrences and InsertIfAbsent 
-  
+  @Override
+  public boolean InsertIfAbsent(Data dat) {
+    Natural idx = SearchPredecessor(dat);
+    idx = (idx == null) ? Natural.ZERO : idx;
+
+    if (GetAt(idx).equals(dat))
+      return false;
+
+    vec.InsertAt(dat, idx);
+    return true;
+  }
+
+  @Override
+  public void RemoveOccurrences(Data dat) {
+    Natural idx = Search(dat);
+
+    if (idx == null)
+      return;
+
+    MutableNatural i = idx.ToMutableNatural();
+
+    while (vec.GetAt(i.ToNatural()) == dat) {
+      vec.RemoveAt(i.GetNIncrement());
+    }
+  }
+
 }
