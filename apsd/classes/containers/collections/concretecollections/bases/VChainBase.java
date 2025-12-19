@@ -174,37 +174,30 @@ abstract public class VChainBase<Data> implements Chain<Data> { // Must implemen
 
   @Override
   public boolean Filter(Predicate<Data> fun) {
-    long deletions = 0;
-    if (fun == null) {
-      return false;
-    }
+    long del = 0;
+    if (fun != null) {
+      MutableForwardIterator<Data> wrt = vec.FIterator();
+      for (; wrt.IsValid(); wrt.Next()) {
+        if (!fun.Apply(wrt.GetCurrent())) {
+          del++;
+          wrt.SetCurrent(null);
+        }
+      }
 
-    MutableForwardIterator<Data> wrt = FIterator();
-    for (; wrt.IsValid(); wrt.Next()) {
-      Data dat = wrt.GetCurrent();
-      if (!fun.Apply(dat)) {
-        wrt.SetCurrent(null);
-        deletions++;
+      if (del > 0) {
+        wrt.Reset();
+        MutableForwardIterator<Data> rdr = vec.FIterator();
+        for (; rdr.IsValid(); rdr.Next()) {
+          if (rdr.GetCurrent() != null) {
+            Data dat = rdr.GetCurrent();
+            rdr.SetCurrent(null);
+            wrt.SetCurrent(dat);
+            wrt.Next();
+          }
+        }
+        vec.Reduce(Natural.Of(del));
       }
     }
-
-    if (deletions == 0)
-      return false;
-
-    wrt.Reset();
-    MutableForwardIterator<Data> rdr = FIterator();
-    for (; rdr.IsValid(); rdr.Next()) {
-      Data current = rdr.GetCurrent();
-      if (current == null)
-        continue;
-
-      wrt.SetCurrent(current);
-      rdr.SetCurrent(null);
-    }
-
-    vec.Reduce(Natural.Of(deletions));
-    return true;
-
+    return del > 0;
   }
-
 }
