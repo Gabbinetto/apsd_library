@@ -38,34 +38,29 @@ public class LLSortedChain<Data extends Comparable<? super Data>> extends LLChai
   /* ************************************************************************ */
 
   public LLNode<Data> PredFind(Data dat) {
-    if (dat == null)
-      return null;
-    ListFRefIterator itr = new ListFRefIterator();
-    long len = Size().ToLong();
-    LLNode<Data> predNode = null;
-
-    if (len == 0)
+    if (dat == null || IsEmpty())
       return null;
 
-    while (len > 1) {
-      long half = len / 2;
-      ListFRefIterator tempItr = new ListFRefIterator(itr);
-      tempItr.Next(half);
-      LLNode<Data> tmp = tempItr.GetCurrent().Get();
-      if (tempItr.GetCurrent().Get().Get().compareTo(dat) < 0) {
-        predNode = tmp;
-        itr = tempItr;
-        len -= half;
-      } else {
-        len = half - 1;
-      }
+    LLNode<Data> predpred = PredPredFind(dat);
+    LLNode<Data> pred = null;
+    if (predpred == null) {
+      pred = headref.Get();
+      if (pred.Get().compareTo(dat) >= 0)
+        return null;
+    } else {
+      pred = predpred.GetNext().Get();
     }
 
-    return predNode;
+    while (!pred.GetNext().IsNull() && pred.GetNext().Get().Get().compareTo(dat) < 0) {
+      pred = pred.GetNext().Get();
+    }
+
+    return pred;
+
   }
 
   public LLNode<Data> PredPredFind(Data dat) {
-    if (dat == null)
+    if (dat == null || IsEmpty())
       return null;
     ListFRefIterator itr = new ListFRefIterator();
     long len = Size().ToLong();
@@ -93,6 +88,9 @@ public class LLSortedChain<Data extends Comparable<? super Data>> extends LLChai
   }
 
   public LLNode<Data> SuccFind(Data dat) {
+    if (dat == null || IsEmpty())
+      return null;
+
     LLNode<Data> predNode = PredFind(dat);
     if (predNode == null) {
       predNode = headref.Get();

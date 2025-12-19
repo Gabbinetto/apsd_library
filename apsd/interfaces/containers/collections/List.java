@@ -20,7 +20,7 @@ public interface List<Data> extends Chain<Data>, MutableSequence<Data>, Insertab
 
   @Override
   default boolean Insert(Data dat) {
-    InsertAt(dat, Size());
+    InsertAt(dat, Natural.ZERO);
     return true;
   }
 
