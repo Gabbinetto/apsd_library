@@ -137,7 +137,7 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
         nodes.SetAt(ref, Natural.Of(cur));
         cur++;
       }
-      
+
       cur = Size().Decrement().ToLong();
     }
 
@@ -295,11 +295,15 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
 
   @Override
   public Data GetFirst() {
+    if (IsEmpty())
+      throw new IndexOutOfBoundsException("GetFirst(): LLChainBase is empty!");
     return headref.Get().Get();
   }
 
   @Override
   public Data GetLast() {
+    if (IsEmpty())
+      throw new IndexOutOfBoundsException("GetLast(): LLChainBase is empty!");
     return tailref.Get().Get();
   }
 

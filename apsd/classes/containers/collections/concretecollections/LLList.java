@@ -8,10 +8,8 @@ import apsd.interfaces.containers.base.TraversableContainer;
 import apsd.interfaces.containers.collections.Chain;
 import apsd.interfaces.containers.collections.List;
 import apsd.interfaces.containers.iterators.ForwardIterator;
-import apsd.interfaces.containers.iterators.MutableBackwardIterator;
 import apsd.interfaces.containers.iterators.MutableForwardIterator;
 import apsd.interfaces.containers.sequences.MutableSequence;
-import apsd.interfaces.containers.sequences.Sequence;
 
 /** Object: Concrete list implementation on linked-list. */
 public class LLList<Data> extends LLChainBase<Data> implements List<Data> {
@@ -65,11 +63,15 @@ public class LLList<Data> extends LLChainBase<Data> implements List<Data> {
 
   @Override
   public void SetFirst(Data dat) {
+    if (IsEmpty())
+      throw new IndexOutOfBoundsException("SetFirst(): LLList is empty!");
     headref.Get().Set(dat);
   }
 
   @Override
   public void SetLast(Data dat) {
+    if (IsEmpty())
+      throw new IndexOutOfBoundsException("SetLast(): LLList is empty!");
     tailref.Get().Set(dat);
   }
 
