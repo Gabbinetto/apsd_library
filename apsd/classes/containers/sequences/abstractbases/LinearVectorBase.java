@@ -20,7 +20,7 @@ abstract public class LinearVectorBase<Data> extends VectorBase<Data> { // Must 
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from ReallocableContainer             */
+  /* Override specific member functions from ReallocableContainer */
   /* ************************************************************************ */
 
   @Override
@@ -34,15 +34,17 @@ abstract public class LinearVectorBase<Data> extends VectorBase<Data> { // Must 
     } else if (newsize.compareTo(Capacity()) == 0) {
       return;
     }
+
+    long size = Size().ToLong();
     Data[] newArr = (Data[]) new Object[(int) nsize];
-    for (long i = 0; i < nsize; i++) {
+    for (long i = 0; i < (nsize < size ? nsize : size); i++) {
       newArr[(int) i] = this.arr[(int) i];
     }
     this.arr = newArr;
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from Sequence                         */
+  /* Override specific member functions from Sequence */
   /* ************************************************************************ */
 
   @Override
@@ -51,7 +53,7 @@ abstract public class LinearVectorBase<Data> extends VectorBase<Data> { // Must 
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from MutableSequence                  */
+  /* Override specific member functions from MutableSequence */
   /* ************************************************************************ */
 
   @Override

@@ -50,8 +50,9 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
       return;
     }
 
+    long size = Size().ToLong();
     Data[] newArr = (Data[]) new Object[(int) nsize];
-    for (long i = 0; i < nsize; i++) {
+    for (long i = 0; i < (nsize < size ? nsize : size); i++) {
       newArr[(int) i] = GetAt(Natural.Of(i));
     }
     this.arr = newArr;
