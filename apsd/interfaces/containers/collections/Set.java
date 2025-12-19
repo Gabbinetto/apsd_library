@@ -23,7 +23,7 @@ public interface Set<Data> extends Collection<Data> { // Must extend Collection
     if (set == null || set.IsEmpty())
       return;
 
-    set.FIterator().ForEachForward(
+    set.BIterator().ForEachBackward(
         dat -> {
           if (Exists(dat))
             Remove(dat);
@@ -41,7 +41,7 @@ public interface Set<Data> extends Collection<Data> { // Must extend Collection
       return;
     }
 
-    FIterator().ForEachForward(
+    BIterator().ForEachBackward(
         dat -> {
           if (!set.Exists(dat))
             Remove(dat);

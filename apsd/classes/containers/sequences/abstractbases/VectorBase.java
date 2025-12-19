@@ -57,9 +57,7 @@ abstract public class VectorBase<Data> implements Vector<Data> {
 
   @Override
   public void Clear() {
-    long size = Size().ToLong();
-    for (int i = 0; i < size; i++)
-      SetAt(null, Natural.Of(i));
+    ArrayAlloc(Natural.ZERO);
   }
 
   /* ************************************************************************ */
