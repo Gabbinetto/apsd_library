@@ -126,16 +126,19 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
 
     @Override
     public void Reset() {
-      cur = -1L;
-      if (Size().IsZero()) {
+      if (IsEmpty()) {
         nodes = null;
         return;
       }
+      cur = 0;
 
-      nodes = new Vector<>();
+      nodes = new Vector<>(Size());
       for (Box<LLNode<Data>> ref = headref; !ref.IsNull(); ref = ref.Get().GetNext()) {
         nodes.SetAt(ref, Natural.Of(cur));
+        cur++;
       }
+      
+      cur = Size().Decrement().ToLong();
     }
 
     @Override
