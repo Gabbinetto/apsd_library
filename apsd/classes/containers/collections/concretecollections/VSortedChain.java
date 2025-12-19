@@ -59,10 +59,15 @@ public class VSortedChain<Data extends Comparable<? super Data>> extends VChainB
 
   @Override
   public boolean InsertIfAbsent(Data dat) {
-    Natural idx = SearchPredecessor(dat);
-    idx = (idx == null) ? Natural.ZERO : idx;
+    if (IsEmpty()) {
+      Insert(dat);
+      return true;
+    }
 
-    if (GetAt(idx).equals(dat))
+    Natural idx = SearchPredecessor(dat);
+    idx = (idx == null) ? Natural.ZERO : idx.Increment();
+
+    if (idx.compareTo(Size()) < 0 && GetAt(idx).equals(dat))
       return false;
 
     vec.InsertAt(dat, idx);
@@ -71,6 +76,9 @@ public class VSortedChain<Data extends Comparable<? super Data>> extends VChainB
 
   @Override
   public void RemoveOccurrences(Data dat) {
+    if (IsEmpty())
+      return;
+
     Natural idx = Search(dat);
 
     if (idx == null)
