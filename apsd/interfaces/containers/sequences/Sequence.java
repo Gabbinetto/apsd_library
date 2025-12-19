@@ -22,12 +22,16 @@ public interface Sequence<Data> extends IterableContainer<Data> { // Must extend
 
   // GetFirst
   default Data GetFirst() {
+    if (IsEmpty())
+      throw new IndexOutOfBoundsException("Sequence GetFirst(): sequence is empty");
     return GetAt(Natural.ZERO);
   }
 
   // GetLast
   default Data GetLast() {
-    return GetAt(IsEmpty() ? Natural.ZERO : Size().Decrement());
+    if (IsEmpty())
+      throw new IndexOutOfBoundsException("Sequence GetLast(): sequence is empty");
+    return GetAt(Size().Decrement());
   }
 
   // Search

@@ -105,12 +105,14 @@ public interface SortedChain<Data extends Comparable<? super Data>> extends Orde
 
   @Override
   default Data Predecessor(Data dat) {
-    return GetAt(SearchPredecessor(dat));
+    Natural idx = SearchPredecessor(dat);
+    return (idx != null) ? GetAt(idx) : null;
   }
 
   @Override
   default Data Successor(Data dat) {
-    return GetAt(SearchSuccessor(dat));
+    Natural idx = SearchSuccessor(dat);
+    return (idx != null) ? GetAt(idx) : null;
   }
 
   @Override
