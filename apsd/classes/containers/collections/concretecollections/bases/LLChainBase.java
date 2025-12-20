@@ -380,8 +380,6 @@ abstract public class LLChainBase<Data> implements Chain<Data> { // Must impleme
     return removedNode.Get().Get();
   }
 
-  // TODO: Metodi come RemoveFirst, RemoveLast, ecc. (Capire come reimplementare)
-
   /* ************************************************************************ */
   /* Override specific member functions from Collection */
   /* ************************************************************************ */

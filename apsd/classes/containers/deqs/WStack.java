@@ -75,6 +75,4 @@ public class WStack<Data> implements Stack<Data> { // Must implement Stack
     return this.lst.GetLast();
   }
 
-  // TODO: Reimplementare in qualche modo TopNPop, TopNSwap e SwapTop
-
 }

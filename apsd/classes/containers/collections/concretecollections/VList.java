@@ -30,14 +30,6 @@ public class VList<Data> extends VChainBase<Data> implements List<Data> { // Mus
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from MutableIterableContainer */
-  /* ************************************************************************ */
-
-  // TODO: FIterator
-
-  // TODO: BIterator
-
-  /* ************************************************************************ */
   /* Override specific member functions from MutableSequence */
   /* ************************************************************************ */
 

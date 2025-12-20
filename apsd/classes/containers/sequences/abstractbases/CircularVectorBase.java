@@ -105,5 +105,4 @@ abstract public class CircularVectorBase<Data> extends VectorBase<Data> { // Mus
     start = (start + len) % arr.length;
   }
 
-  // TODO: ShiftRight
 }

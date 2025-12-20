@@ -32,10 +32,4 @@ public interface Chain<Data> extends Set<Data>, RemovableAtSequence<Data> { // M
     return (Chain<Data>) SubSequence(start, end);
   }
 
-  /* ************************************************************************ */
-  /* Override specific member functions from Sequence */
-  /* ************************************************************************ */
-
-  // TODO: Search
-
 }

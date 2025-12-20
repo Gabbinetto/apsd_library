@@ -1,14 +1,11 @@
 package zapsdtest.testframework.containers;
 
 import apsd.interfaces.containers.base.Container;
-import apsd.interfaces.containers.base.TraversableContainer;
 import zapsdtest.testframework.containers.base.ContainerTest;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-
-import javax.xml.crypto.Data;
 
 import org.junit.jupiter.api.*;
 

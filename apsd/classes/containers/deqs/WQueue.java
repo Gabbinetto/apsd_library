@@ -75,6 +75,4 @@ public class WQueue<Data> implements Queue<Data> { // Must implement Queue
     return this.lst.GetFirst();
   }
 
-  // TODO: Reimplementare HeadNDequeue in qualche modo
-
 }

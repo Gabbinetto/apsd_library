@@ -33,14 +33,6 @@ public class LLList<Data> extends LLChainBase<Data> implements List<Data> {
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from MutableIterableContainer */
-  /* ************************************************************************ */
-
-  // TODO: FIterator
-
-  // TODO: BIterator
-
-  /* ************************************************************************ */
   /* Override specific member functions from MutableSequence */
   /* ************************************************************************ */
 
