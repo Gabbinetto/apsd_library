@@ -6,7 +6,7 @@ import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.base.TraversableContainer;
 
 /** Object: Concrete (static) circular vector implementation. */
-public class CircularVector<Data> extends CircularVectorBase<Data> { // Must extend CircularVectorBase
+public class CircularVector<Data> extends CircularVectorBase<Data> {
 
   public CircularVector() {
     super(Natural.ZERO);

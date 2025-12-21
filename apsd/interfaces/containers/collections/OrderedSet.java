@@ -3,7 +3,7 @@ package apsd.interfaces.containers.collections;
 import apsd.interfaces.containers.iterators.ForwardIterator;
 import apsd.interfaces.containers.iterators.BackwardIterator;
 
-public interface OrderedSet<Data extends Comparable<? super Data>> extends Set<Data> { // Must extend Set
+public interface OrderedSet<Data extends Comparable<? super Data>> extends Set<Data> {
 
   // Min
   default Data Min() {

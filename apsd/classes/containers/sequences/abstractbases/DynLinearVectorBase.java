@@ -5,12 +5,7 @@ import apsd.interfaces.containers.base.TraversableContainer;
 import apsd.interfaces.containers.sequences.DynVector;
 
 /** Object: Abstract dynamic linear vector base implementation. */
-abstract public class DynLinearVectorBase<Data> extends LinearVectorBase<Data> implements DynVector<Data> { // Must
-                                                                                                            // extend
-                                                                                                            // LinearVectorBase
-                                                                                                            // and
-                                                                                                            // implement
-                                                                                                            // DynVector
+abstract public class DynLinearVectorBase<Data> extends LinearVectorBase<Data> implements DynVector<Data> {
 
   protected long size = 0L;
 

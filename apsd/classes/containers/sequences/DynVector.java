@@ -6,7 +6,7 @@ import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.base.TraversableContainer;
 
 /** Object: Concrete dynamic (linear) vector implementation. */
-public class DynVector<Data> extends DynLinearVectorBase<Data> { // Must extend DynLinearVectorBase
+public class DynVector<Data> extends DynLinearVectorBase<Data> {
 
   public DynVector() {
     super(Natural.ZERO);

@@ -9,13 +9,7 @@ import apsd.interfaces.containers.iterators.ForwardIterator;
 import apsd.interfaces.traits.Predicate;
 
 public interface Collection<Data>
-    extends ClearableContainer, InsertableContainer<Data>, RemovableContainer<Data>, IterableContainer<Data> { // Must
-                                                                                                               // extend
-                                                                                                               // ClearableContainer,
-                                                                                                               // InsertableContainer,
-                                                                                                               // RemovableContainer,
-                                                                                                               // and
-                                                                                                               // IterableContainer
+    extends ClearableContainer, InsertableContainer<Data>, RemovableContainer<Data>, IterableContainer<Data> {
 
   default boolean Filter(Predicate<Data> fun) {
     Natural oldsize = Size();

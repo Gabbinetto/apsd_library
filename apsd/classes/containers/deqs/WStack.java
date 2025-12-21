@@ -7,7 +7,7 @@ import apsd.interfaces.containers.collections.List;
 import apsd.interfaces.containers.deqs.Stack;
 
 /** Object: Wrapper stack implementation. */
-public class WStack<Data> implements Stack<Data> { // Must implement Stack
+public class WStack<Data> implements Stack<Data> {
 
   protected final List<Data> lst;
 
@@ -33,7 +33,7 @@ public class WStack<Data> implements Stack<Data> { // Must implement Stack
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from Container                        */
+  /* Override specific member functions from Container */
   /* ************************************************************************ */
 
   @Override
@@ -42,7 +42,7 @@ public class WStack<Data> implements Stack<Data> { // Must implement Stack
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from ClearableContainer               */
+  /* Override specific member functions from ClearableContainer */
   /* ************************************************************************ */
 
   @Override
@@ -51,7 +51,7 @@ public class WStack<Data> implements Stack<Data> { // Must implement Stack
   }
 
   /* ************************************************************************ */
-  /* Override specific member functions from Stack                            */
+  /* Override specific member functions from Stack */
   /* ************************************************************************ */
 
   @Override
@@ -66,7 +66,7 @@ public class WStack<Data> implements Stack<Data> { // Must implement Stack
     }
     this.lst.RemoveLast();
   }
-  
+
   @Override
   public Data Top() {
     if (IsEmpty()) {

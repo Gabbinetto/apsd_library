@@ -11,7 +11,7 @@ import apsd.interfaces.containers.sequences.Sequence;
 import apsd.interfaces.traits.Predicate;
 
 /** Object: Abstract list base implementation on (dynamic circular) vector. */
-abstract public class VChainBase<Data> implements Chain<Data> { // Must implement Chain
+abstract public class VChainBase<Data> implements Chain<Data> {
 
   protected final DynVector<Data> vec;
 

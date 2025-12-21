@@ -3,11 +3,7 @@ package apsd.interfaces.containers.collections;
 import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.sequences.SortedSequence;
 
-public interface SortedChain<Data extends Comparable<? super Data>> extends OrderedChain<Data>, SortedSequence<Data> { // Must
-                                                                                                                       // extend
-                                                                                                                       // OrderedChain
-                                                                                                                       // and
-                                                                                                                       // SortedSequence
+public interface SortedChain<Data extends Comparable<? super Data>> extends OrderedChain<Data>, SortedSequence<Data> {
 
   // SearchPredecessor
   default Natural SearchPredecessor(Data dat) {

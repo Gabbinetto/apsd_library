@@ -3,8 +3,7 @@ package apsd.interfaces.containers.sequences;
 import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.base.ReallocableContainer;
 
-public interface Vector<Data> extends ReallocableContainer, MutableSequence<Data> { // Must extend ReallocableContainer
-                                                                                    // and MutableSequence
+public interface Vector<Data> extends ReallocableContainer, MutableSequence<Data> {
 
   // ShiftLeft
   default void ShiftLeft(Natural pos) {

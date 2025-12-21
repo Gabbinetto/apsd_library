@@ -9,7 +9,7 @@ import apsd.interfaces.containers.collections.List;
 import apsd.interfaces.containers.sequences.MutableSequence;
 
 /** Object: Concrete list implementation on (dynamic circular) vector. */
-public class VList<Data> extends VChainBase<Data> implements List<Data> { // Must extend VChainBase and implement List
+public class VList<Data> extends VChainBase<Data> implements List<Data> {
 
   public VList() {
     super();
@@ -32,8 +32,6 @@ public class VList<Data> extends VChainBase<Data> implements List<Data> { // Mus
   /* ************************************************************************ */
   /* Override specific member functions from MutableSequence */
   /* ************************************************************************ */
-
-  // TOD: SetAt
 
   @Override
   public MutableSequence<Data> SubSequence(Natural start, Natural end) {

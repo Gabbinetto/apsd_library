@@ -3,7 +3,7 @@ package apsd.interfaces.containers.collections;
 import apsd.interfaces.containers.sequences.RemovableAtSequence;
 import apsd.classes.utilities.Natural;
 
-public interface Chain<Data> extends Set<Data>, RemovableAtSequence<Data> { // Must extend RemovableAtSequence
+public interface Chain<Data> extends Set<Data>, RemovableAtSequence<Data> {
 
   // InsertIfAbsent
   default boolean InsertIfAbsent(Data dat) {

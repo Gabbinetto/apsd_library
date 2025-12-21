@@ -4,10 +4,7 @@ import apsd.interfaces.containers.sequences.MutableSequence;
 import apsd.interfaces.containers.sequences.InsertableAtSequence;
 import apsd.classes.utilities.Natural;
 
-public interface List<Data> extends Chain<Data>, MutableSequence<Data>, InsertableAtSequence<Data> { // Must extend
-                                                                                                     // MutableSequence,
-                                                                                                     // InsertableAtSequence,
-                                                                                                     // and Chain
+public interface List<Data> extends Chain<Data>, MutableSequence<Data>, InsertableAtSequence<Data> {
 
   // SubList
   default List<Data> SubList(Natural start, Natural end) {

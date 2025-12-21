@@ -8,9 +8,7 @@ import apsd.interfaces.containers.iterators.MutableForwardIterator;
  * Interface: Sequence & MutableIterableContainer con supporto alla scrittura
  * tramite posizione.
  */
-public interface MutableSequence<Data> extends Sequence<Data>, MutableIterableContainer<Data> { // Must extend Sequence
-                                                                                                // and
-                                                                                                // MutableIterableContainer
+public interface MutableSequence<Data> extends Sequence<Data>, MutableIterableContainer<Data> {
 
   // SetAt
   default void SetAt(Data dat, Natural num) {

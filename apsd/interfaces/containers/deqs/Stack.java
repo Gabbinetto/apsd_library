@@ -4,8 +4,7 @@ import apsd.interfaces.containers.base.ClearableContainer;
 import apsd.interfaces.containers.base.InsertableContainer;
 import apsd.classes.utilities.Natural;
 
-public interface Stack<Data> extends ClearableContainer, InsertableContainer<Data> { // Must extend ClearableContainer
-                                                                                     // and InsertableContainer
+public interface Stack<Data> extends ClearableContainer, InsertableContainer<Data> {
 
   // Top
   Data Top();

@@ -9,7 +9,7 @@ import apsd.interfaces.containers.iterators.ForwardIterator;
  * Interface: IterableContainer con supporto alla lettura e ricerca tramite
  * posizione.
  */
-public interface Sequence<Data> extends IterableContainer<Data> { // Must extend IterableContainer
+public interface Sequence<Data> extends IterableContainer<Data> {
 
   // GetAt
   default Data GetAt(Natural num) {

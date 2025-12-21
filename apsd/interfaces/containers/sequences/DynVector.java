@@ -4,13 +4,7 @@ import apsd.classes.utilities.Natural;
 import apsd.interfaces.containers.base.ResizableContainer;
 
 public interface DynVector<Data>
-    extends Vector<Data>, ResizableContainer, InsertableAtSequence<Data>, RemovableAtSequence<Data> { // Must
-                                                                                                      // extend
-                                                                                                      // ResizableContainer,
-                                                                                                      // InsertableAtSequence,
-                                                                                                      // RemovableAtSequence,
-                                                                                                      // and
-                                                                                                      // Vector
+    extends Vector<Data>, ResizableContainer, InsertableAtSequence<Data>, RemovableAtSequence<Data> {
 
   /* ************************************************************************ */
   /* Override specific member functions from InsertableAtSequence */

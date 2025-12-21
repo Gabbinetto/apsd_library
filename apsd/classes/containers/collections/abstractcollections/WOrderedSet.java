@@ -7,9 +7,7 @@ import apsd.interfaces.containers.collections.SortedChain;
 import apsd.interfaces.containers.collections.Chain;;
 
 /** Object: Wrapper ordered set implementation via ordered chain. */
-public class WOrderedSet<Data extends Comparable<? super Data>> extends WOrderedSetBase<Data, SortedChain<Data>> { // Must
-                                                                                                                   // extend
-                                                                                                                   // WOrderedSetBase
+public class WOrderedSet<Data extends Comparable<? super Data>> extends WOrderedSetBase<Data, SortedChain<Data>> {
 
   public WOrderedSet() {
     super();

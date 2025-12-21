@@ -4,7 +4,7 @@ import apsd.classes.utilities.Natural;
 import apsd.interfaces.traits.Predicate;
 
 /** Interface: Iteratore in avanti. */
-public interface ForwardIterator<Data> extends Iterator<Data> { // Must extend Iterator
+public interface ForwardIterator<Data> extends Iterator<Data> {
 
   // Next
   default void Next(Natural amount) {

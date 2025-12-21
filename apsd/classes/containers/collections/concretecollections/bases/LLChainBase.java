@@ -14,7 +14,7 @@ import apsd.interfaces.containers.sequences.Sequence;
 import apsd.interfaces.traits.Predicate;
 
 /** Object: Abstract chain base implementation on linked-list. */
-abstract public class LLChainBase<Data> implements Chain<Data> { // Must implement Chain
+abstract public class LLChainBase<Data> implements Chain<Data> {
 
   protected final MutableNatural size = new MutableNatural();
   protected final Box<LLNode<Data>> headref = new Box<>();

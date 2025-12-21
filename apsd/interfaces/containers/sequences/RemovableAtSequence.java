@@ -5,7 +5,7 @@ import apsd.classes.utilities.Natural;
 /**
  * Interface: Sequence con supporto alla rimozione di un dato tramite posizione.
  */
-public interface RemovableAtSequence<Data> extends Sequence<Data> { // Must extend Sequence
+public interface RemovableAtSequence<Data> extends Sequence<Data> {
 
   // RemoveAt
   default void RemoveAt(Natural num) {
